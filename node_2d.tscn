@@ -4,6 +4,12 @@
 [ext_resource type="PackedScene" uid="uid://cjlq260cxfpcf" path="res://assets/character/green/greenline.fbx" id="2_0hol4"]
 [ext_resource type="PackedScene" uid="uid://dd1n2bcj21j5q" path="res://assets/world/rails.fbx" id="3_epypp"]
 [ext_resource type="Script" uid="uid://dtd6h1ynbhphw" path="res://assets/character/green/greenline.gd" id="3_q6r6c"]
+[ext_resource type="PackedScene" uid="uid://gpp4wab8lcqs" path="res://assets/character/red/redline.fbx" id="5_q6r6c"]
+[ext_resource type="Script" uid="uid://ur1si14kmlbp" path="res://assets/character/red/redline.gd" id="6_kdubu"]
+[ext_resource type="PackedScene" uid="uid://bdru7kinus1lt" path="res://assets/character/orange/orangeline.fbx" id="7_rj586"]
+[ext_resource type="PackedScene" uid="uid://bosrbetdc2khk" path="res://assets/character/blue/blueline.fbx" id="8_4d7sh"]
+[ext_resource type="Script" uid="uid://yxl118o7kcu6" path="res://assets/character/orange/orangeline.gd" id="8_ir8iy"]
+[ext_resource type="Script" uid="uid://d3cy707fqfc07" path="res://assets/character/blue/blueline.gd" id="9_4d7sh"]
 
 [sub_resource type="Animation" id="Animation_epypp"]
 length = 0.001
@@ -100,8 +106,11 @@ script = ExtResource("1_wtcfe")
 use_threads = true
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1322596672]
-transform = Transform3D(0.7716232, 0.159262, -0.61581916, 0, 0.9681475, 0.2503805, 0.6360799, -0.1931994, 0.7470451, -20.619001, 14.169964, -3.7985945)
+transform = Transform3D(0.39236966, -0.39119896, 0.83247185, 0, 0.90505, 0.42530522, -0.9198076, -0.16687685, 0.35511416, 118.51138, 71.25314, 6.9839134)
+keep_aspect = 0
+projection = 1
 fov = 77.71061
+size = 100.09398
 
 [node name="greenline" parent="." unique_id=1956945032 node_paths=PackedStringArray("location_manager") instance=ExtResource("2_0hol4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.998, -24.555)
@@ -131,13 +140,25 @@ environment = SubResource("Environment_0e48y")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 60.970352, 32.41156)
 
 [node name="rails" parent="." unique_id=1029825365 instance=ExtResource("3_epypp")]
-transform = Transform3D(-1, 0, -3.166382e-06, 0, 1, 0, 1.509958e-07, 0, -20.97, -0.0014533997, 1.9981437, -44.141)
+transform = Transform3D(-1, 0, -3.166382e-06, 0, 1, 0, 1.509958e-07, 0, -20.97, -0.0014533997, 1.9981437, -4.781929)
 
 [node name="rails2" parent="." unique_id=1331645896 instance=ExtResource("3_epypp")]
-transform = Transform3D(-1, 0, -3.166382e-06, 0, 1, 0, 1.509958e-07, 0, -20.97, -10.588873, 1.9981437, -44.141)
+transform = Transform3D(-1, 0, -3.166382e-06, 0, 1, 0, 1.509958e-07, 0, -20.97, -10.588873, 1.9981437, -4.781929)
 
 [node name="rails3" parent="." unique_id=958684899 instance=ExtResource("3_epypp")]
-transform = Transform3D(-1, 0, -3.166382e-06, 0, 1, 0, 1.509958e-07, 0, -20.97, 20.82053, 1.9981437, -44.141)
+transform = Transform3D(-1, 0, -3.166382e-06, 0, 1, 0, 1.509958e-07, 0, -20.97, 20.82053, 1.9981437, -4.781929)
 
 [node name="rails4" parent="." unique_id=481925957 instance=ExtResource("3_epypp")]
-transform = Transform3D(-1, 0, -3.166382e-06, 0, 1, 0, 1.509958e-07, 0, -20.97, 10.66259, 1.9981437, -44.141)
+transform = Transform3D(-1, 0, -3.166382e-06, 0, 1, 0, 1.509958e-07, 0, -20.97, 10.66259, 1.9981437, -4.781929)
+
+[node name="redline" parent="." unique_id=82451194 instance=ExtResource("5_q6r6c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.589, 1.9352875, -27.284311)
+script = ExtResource("6_kdubu")
+
+[node name="orangeline" parent="." unique_id=1932407106 instance=ExtResource("7_rj586")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.663, 1.935, -26.837805)
+script = ExtResource("8_ir8iy")
+
+[node name="blueline" parent="." unique_id=917154609 instance=ExtResource("8_4d7sh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.683, 1.935, -26.989553)
+script = ExtResource("9_4d7sh")
