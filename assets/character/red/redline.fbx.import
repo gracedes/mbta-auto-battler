@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cjlq260cxfpcf"
-path="res://.godot/imported/greenline.fbx-df0d23c0382ff325e98e19089c43976a.scn"
+uid="uid://gpp4wab8lcqs"
+path="res://.godot/imported/redline.fbx-b0d1ec173ff86aadcdc1e46a873ae71c.scn"
 
 [deps]
 
-source_file="res://assets/character/greenline.fbx"
-dest_files=["res://.godot/imported/greenline.fbx-df0d23c0382ff325e98e19089c43976a.scn"]
+source_file="res://assets/character/red/redline.fbx"
+dest_files=["res://.godot/imported/redline.fbx-b0d1ec173ff86aadcdc1e46a873ae71c.scn"]
 
 [params]
 

@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://4pqund3nukl7"]
 
 [ext_resource type="Script" uid="uid://dt3nc4our1mgp" path="res://node_2d.gd" id="1_wtcfe"]
-[ext_resource type="PackedScene" uid="uid://cjlq260cxfpcf" path="res://assets/character/greenline.fbx" id="2_0e48y"]
+[ext_resource type="PackedScene" uid="uid://cjlq260cxfpcf" path="res://assets/character/green/greenline.fbx" id="2_0hol4"]
 [ext_resource type="PackedScene" uid="uid://dd1n2bcj21j5q" path="res://assets/world/rails.fbx" id="3_epypp"]
+[ext_resource type="Script" uid="uid://dtd6h1ynbhphw" path="res://assets/character/green/greenline.gd" id="3_q6r6c"]
 
 [sub_resource type="Animation" id="Animation_epypp"]
 length = 0.001
@@ -18,6 +19,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector3(0, 0, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.998, -24.555)]
+}
 
 [sub_resource type="Animation" id="Animation_0hol4"]
 resource_name = "attack"
@@ -29,10 +42,22 @@ tracks/0/path = NodePath(".:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.26666665, 0.5667, 0.7667, 0.9667001, 1.1667, 1.6666666),
+"times": PackedFloat32Array(0.3666333, 0.6666666, 0.8666667, 1.0666667, 1.2666667, 2.0333),
 "transitions": PackedFloat32Array(0.70710725, 0.70710725, 0.70710725, 0.70710725, 0.70710725, 0.70710725),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 0, 0.059341196), Vector3(0, 0, 0), Vector3(0, 0, -0.059341196), Vector3(0, 0, 0.02094395), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.4, 0.6666667, 1.370096),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 1.998, -24.555), Vector3(0, 1.998, -42.96264), Vector3(0, 1.998, -23.822618)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_q6r6c"]
@@ -75,11 +100,13 @@ script = ExtResource("1_wtcfe")
 use_threads = true
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1322596672]
-transform = Transform3D(0.9832551, -0.014298104, 0.18167269, 0, 0.99691725, 0.078459926, -0.18223448, -0.07714612, 0.98022395, 4.4645224, 7.567665, -9.21566)
-fov = 33.8
+transform = Transform3D(0.7716232, 0.159262, -0.61581916, 0, 0.9681475, 0.2503805, 0.6360799, -0.1931994, 0.7470451, -20.619001, 14.169964, -3.7985945)
+fov = 77.71061
 
-[node name="greenline" parent="." unique_id=368168200 instance=ExtResource("2_0e48y")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0014533997, 1.9981437, -24.55478)
+[node name="greenline" parent="." unique_id=1956945032 node_paths=PackedStringArray("location_manager") instance=ExtResource("2_0hol4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.998, -24.555)
+script = ExtResource("3_q6r6c")
+location_manager = NodePath("..")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="greenline" unique_id=437037788]
 libraries/ = SubResource("AnimationLibrary_q6r6c")
@@ -107,4 +134,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 60.970352, 32.41156)
 transform = Transform3D(-1, 0, -3.166382e-06, 0, 1, 0, 1.509958e-07, 0, -20.97, -0.0014533997, 1.9981437, -44.141)
 
 [node name="rails2" parent="." unique_id=1331645896 instance=ExtResource("3_epypp")]
-transform = Transform3D(-1, 0, -3.166382e-06, 0, 1, 0, 1.509958e-07, 0, -20.97, -6.600899, 1.9981437, -44.141)
+transform = Transform3D(-1, 0, -3.166382e-06, 0, 1, 0, 1.509958e-07, 0, -20.97, -10.588873, 1.9981437, -44.141)
+
+[node name="rails3" parent="." unique_id=958684899 instance=ExtResource("3_epypp")]
+transform = Transform3D(-1, 0, -3.166382e-06, 0, 1, 0, 1.509958e-07, 0, -20.97, 20.82053, 1.9981437, -44.141)
+
+[node name="rails4" parent="." unique_id=481925957 instance=ExtResource("3_epypp")]
+transform = Transform3D(-1, 0, -3.166382e-06, 0, 1, 0, 1.509958e-07, 0, -20.97, 10.66259, 1.9981437, -44.141)
