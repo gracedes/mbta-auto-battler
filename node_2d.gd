@@ -2,21 +2,41 @@
 extends Node2D
 
 @onready var api_key_file = "res://api-key.txt"
-const API_ROOT = "https://api-v3.mbta.com"
+const API_ROOT = "https://api-v3.mbta.com/stops?"
+var headers = []
+
+const MAX_RADIUS = 0.01    # 0.01 = 0.5 miles
+const ROUTES = ["Green", "Red", "Orange", "Blue"]
+const ROUTES_STRING = "Green,Red,Orange,Blue"
+
+@export var visited = {}
 
 func _ready():
 	var api_key = load_api_key()
-	var headers := PackedStringArray([
-		"X-API-Key: " + api_key,
-	])
-	$HTTPRequest.request_completed.connect(_on_request_completed)
-	$HTTPRequest.request(API_ROOT + "/stops?filter%5Broute%5D=Red", headers)
+	headers = PackedStringArray(["X-API-Key: " + api_key])
+	loc_ping()
 
-func _on_request_completed(_result, _response_code, _headers, body):
+func loc_ping():
+	var loc_temp = [-71.141287, 42.39583]
+	
+	$HTTPRequest.request_completed.connect(_on_loc_request_completed)
+	$HTTPRequest.request("%sfilter[route]=%s&filter[longitude]=%s&filter[latitude]=%s&filter[radius]=%s" % [API_ROOT, ROUTES_STRING, loc_temp[0], loc_temp[1], MAX_RADIUS], headers)
+	
+	return
+
+
+func _on_loc_request_completed(_result, _response_code, _headers, body):
 	var json = JSON.parse_string(body.get_string_from_utf8())
-	for station in json["data"]:
-		print(station["attributes"]["name"])
+	
+	var lines = {}
+	for line in ROUTES:
+		lines[line] = ""
 		
+	for station in json["data"]:
+		#station_lines = 
+		print(station)
+	return json
+	
 
 func load_api_key() -> String:
 	var key := OS.get_environment("MBTA_API_KEY")
