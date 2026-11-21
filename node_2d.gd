@@ -4,7 +4,7 @@ extends Node2D
 const API_ROOT = "https://mbta.gracie.foo"
 var headers = []
 
-const MAX_RADIUS = 0.01    # 0.01 = 0.5 miles
+const MAX_RADIUS = 0.002    # 0.01 = 0.5 miles
 const ROUTES = ["Green", "Red", "Orange", "Blue"]
 const ROUTE_FILTERS = {
 	"Green": "Green-B,Green-C,Green-D,Green-E",
@@ -17,10 +17,17 @@ const ROUTES_STRING = "Green-B,Green-C,Green-D,Green-E,Red,Orange,Blue"
 var pending_routes = ROUTES.duplicate()
 var current_route = ""
 var routes = {}
+
+var XP_GAIN = 25
 @export var visited = {}
 
 func _ready():
 	create_routes_list()
+	await get_tree().create_timer(1.0).timeout
+	loc_ping()
+	await get_tree().create_timer(1.0).timeout
+	loc_ping()
+	await get_tree().create_timer(1.0).timeout
 	loc_ping()
 
 func create_routes_list():
@@ -69,6 +76,18 @@ func _on_loc_request_completed(_result, _response_code, _headers, body, http_req
 	if json == null:
 		return
 	for station in json["data"]:
-		print(station["attributes"]["name"])
-		for route in routes[station["attributes"]["name"]]:
-			print(route)
+		name = station["attributes"]["name"]
+		print(name)
+		if not name in routes:
+			continue
+		
+		var xp
+		if name in visited:
+			xp = XP_GAIN
+		else:
+			visited[name] = 1
+			xp = 10 * XP_GAIN
+		print(visited)
+		for route in routes[name]:
+			print(route + str(xp))
+			# send signal to train to level up
