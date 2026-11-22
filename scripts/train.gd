@@ -15,7 +15,7 @@ var anim_mapping = {
 var attack_timer = 0.0
 var ATTACK_TIMER_MAX = 5.0
 
-@export var xp = 20000000
+@export var xp = 25
 var level
 var dps: float
 var rof: float
