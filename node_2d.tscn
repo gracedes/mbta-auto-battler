@@ -47,6 +47,8 @@ billboard_keep_scale = true
 material = SubResource("StandardMaterial3D_mt4rs")
 size = Vector2(3.8, 6.37)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_4d7sh"]
+
 [sub_resource type="Gradient" id="Gradient_ir8iy"]
 colors = PackedColorArray(0.73, 0.5341167, 0.21900001, 1, 0.98, 0.28175002, 0.245, 1)
 
@@ -297,7 +299,6 @@ _data = {
 }
 
 [node name="Node2D" type="Node2D" unique_id=519171290]
-position = Vector2(0, 1.998)
 script = ExtResource("1_wtcfe")
 
 [node name="HTTPRequest" type="HTTPRequest" parent="." unique_id=1338613847]
@@ -351,12 +352,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7623446, 5.8153076, -0.985
 mesh = SubResource("QuadMesh_hhkj5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy" unique_id=211693415]
+shape = SubResource("BoxShape3D_4d7sh")
+disabled = true
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Enemy" unique_id=620033541]
 transform = Transform3D(1.389455, 0, 0.9807886, 0, 3.2658432, 0, -2.2035673, 0, 0.61843437, 1.1223432, 6.376416, 0.09000015)
 amount = 250
 amount_ratio = 0.9292
-sub_emitter = NodePath(".")
 lifetime = 1.12
 preprocess = 1.39
 speed_scale = 0.68
