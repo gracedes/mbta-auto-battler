@@ -1,0 +1,86 @@
+[gd_scene format=3 uid="uid://b13j32stagft"]
+
+[ext_resource type="Script" uid="uid://dxc4awpksigfs" path="res://assets/ui/line_card.gd" id="1_c76qm"]
+[ext_resource type="FontFile" uid="uid://b6jhkky7ko1p0" path="res://assets/ui/fonts/Inter-VariableFont_opsz,wght.ttf" id="1_v5iq4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4r7k6"]
+bg_color = Color(0.8509804, 0.8509804, 0.8509804, 1)
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mt4rs"]
+bg_color = Color(0.38666782, 0.2408542, 0.06332488, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hhkj5"]
+bg_color = Color(0.78627336, 0.51224655, 0.19426855, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="LineCard" type="PanelContainer" unique_id=1705578490]
+custom_minimum_size = Vector2(535, 172)
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_4r7k6")
+script = ExtResource("1_c76qm")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=46199378]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=2009688706]
+layout_mode = 2
+
+[node name="LevelLabel" type="Label" parent="MarginContainer/HBoxContainer" unique_id=1474061542]
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(400, -45)
+theme_override_colors/font_color = Color(0.06, 0.06, 0.06, 1)
+theme_override_fonts/font = ExtResource("1_v5iq4")
+theme_override_font_sizes/font_size = 36
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1359806081]
+layout_mode = 2
+
+[node name="LineNameLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=2138571204]
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.06, 0.06, 0.06, 1)
+theme_override_fonts/font = ExtResource("1_v5iq4")
+theme_override_font_sizes/font_size = 36
+
+[node name="DPSLabel2" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=757170209]
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, 40)
+theme_override_colors/font_color = Color(0.06, 0.06, 0.06, 1)
+theme_override_fonts/font = ExtResource("1_v5iq4")
+theme_override_font_sizes/font_size = 36
+
+[node name="TextureProgressBar" type="ProgressBar" parent="MarginContainer/HBoxContainer" unique_id=355472439]
+custom_minimum_size = Vector2(320, 29)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+offset_transform_position = Vector2(100, 0)
+theme_override_colors/font_outline_color = Color(0.40765938, 0.2642498, 0.105009906, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_mt4rs")
+theme_override_styles/fill = SubResource("StyleBoxFlat_hhkj5")
+value = 50.0
+show_percentage = false
