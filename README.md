@@ -10,6 +10,8 @@ For our project wanted to make a game that would inspire players to stray away f
 4. the first time each train gains XP, it is added to your party; you'll have to visit each of the four lines to fill your party!
 5. Depending on their total XP and level, trains do a certain amount of damage at a certain rate of fire against the big evil fire elemental
 6. But be careful! When the enemy is defeated, it comes back even stronger than before. You'll have to visit as many stations as you can to advance further and earn bragging rights amongst all your friends
+ 
+![gameplay of Next Stop: Fire!](git-assets/screenshot.png)
 ## Challenges
 - Any code stored locally in a Godot game can be easily decompiled and exposed, which made securing our API key a serious issue. We ended up writing a relay server which obscures our API key by acting as a middleman, taking the request parameters and contacts the MBTA API itself before returning the response back to the Godot client, which we hosted on a Raspberry Pi that Grace had sitting around. You can even make requests to https://mbta.gracie.foo yourself with the same args as you would the normal MBTA API server to try it yourself! The server-side code can be found at https://github.com/gracedes/mbta-api-relay
 - Godot also has no native location data support, so we had to write a lot of the location and async API calls handling ourselves.
