@@ -284,3 +284,5 @@ func debug_inputs():
 		elif Input.is_action_just_pressed("delete_save"):
 			print("deleting save :(")
 			DirAccess.remove_absolute(SAVE_PATH)
+			await get_tree().process_frame
+			get_tree().reload_current_scene()
