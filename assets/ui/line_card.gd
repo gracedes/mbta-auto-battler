@@ -6,6 +6,7 @@ extends PanelContainer
 		line_name = value
 		if is_node_ready():
 			$MarginContainer/HBoxContainer/VBoxContainer/LineNameLabel.text = value
+			
 
 @export var border_color: Color = Color("#003DA5"):
 	set(value):
