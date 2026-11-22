@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://dt3nc4our1mgp" path="res://scripts/main.gd" id="1_wtcfe"]
 [ext_resource type="PackedScene" uid="uid://cjlq260cxfpcf" path="res://assets/character/green/greenline.fbx" id="2_0hol4"]
-[ext_resource type="Script" uid="uid://c0sabsx3aj1ic" path="res://scripts/enemy.gd" id="2_4d7sh"]
 [ext_resource type="Texture2D" uid="uid://b5b175ditlmdj" path="res://assets/textures/febrianes86-fire-9534823.svg" id="2_hqns4"]
 [ext_resource type="PackedScene" uid="uid://dd1n2bcj21j5q" path="res://assets/world/rails.fbx" id="3_epypp"]
 [ext_resource type="Script" uid="uid://dtd6h1ynbhphw" path="res://scripts/train.gd" id="3_q6r6c"]
 [ext_resource type="PackedScene" uid="uid://gpp4wab8lcqs" path="res://assets/character/red/redline.fbx" id="5_q6r6c"]
+[ext_resource type="PackedScene" uid="uid://dib6nb0785wpu" path="res://assets/animations/attack.tscn" id="6_4d7sh"]
 [ext_resource type="PackedScene" uid="uid://bdru7kinus1lt" path="res://assets/character/orange/orangeline.fbx" id="7_rj586"]
 [ext_resource type="PackedScene" uid="uid://bosrbetdc2khk" path="res://assets/character/blue/blueline.fbx" id="8_4d7sh"]
 
@@ -89,68 +89,215 @@ albedo_texture = ExtResource("2_hqns4")
 material = SubResource("StandardMaterial3D_hqns4")
 size = Vector2(1, 1.33)
 
-[sub_resource type="Animation" id="Animation_epypp"]
+[sub_resource type="Animation" id="Animation_4d7sh"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
+tracks/0/path = NodePath("redline:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-10.589, 1.998, -24.555)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("redline:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(0, 0, 0)]
 }
+
+[sub_resource type="Animation" id="Animation_ir8iy"]
+resource_name = "attack_red"
+length = 3.3333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("redline:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.0867332, 3.0042915),
+"transitions": PackedFloat32Array(2.462286, 0.43527517, 1),
+"update": 0,
+"values": [Vector3(-10.589, 1.998, -24.555), Vector3(-10.589, 1.998, -66.04701), Vector3(-10.589, 1.998, -24.555)]
+}
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:position")
+tracks/1/path = NodePath("redline:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.0333333, 1.1603506, 1.3333334, 1.4666667, 1.6, 1.7437292),
+"transitions": PackedFloat32Array(2.639016, 2.639016, 2.639016, 2.639016, 2.639016, 2.639016),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -0.10995574), Vector3(0, 0, 0.21816616), Vector3(0, 0, -0.05235988), Vector3(0, 0, 0.02617994), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("redline:position:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("redline:position:z")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hqns4"]
+_data = {
+&"RESET": SubResource("Animation_4d7sh"),
+&"attack_red": SubResource("Animation_ir8iy")
+}
+
+[sub_resource type="Animation" id="Animation_hqns4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(10.663, 1.935, -26.837805)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 1.998, -24.555)]
+"values": [Vector3(0, 0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_0hol4"]
-resource_name = "attack"
-length = 2.0
+[sub_resource type="Animation" id="Animation_x0ka3"]
+resource_name = "attack_orange"
+length = 3.8666666
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
+tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.3666333, 0.6666666, 0.8666667, 1.0666667, 1.2666667, 2.0333),
-"transitions": PackedFloat32Array(0.70710725, 0.70710725, 0.70710725, 0.70710725, 0.70710725, 0.70710725),
+"times": PackedFloat32Array(0, 1.0225283, 3.0413663),
+"transitions": PackedFloat32Array(2.828427, 0.43527523, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.059341196), Vector3(0, 0, 0), Vector3(0, 0, -0.059341196), Vector3(0, 0, 0.02094395), Vector3(0, 0, 0)]
+"values": [Vector3(10.663, 1.935, -26.837805), Vector3(10.663, 1.935, -66.86328), Vector3(10.663, 1.935, -26.838)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:position")
+tracks/1/path = NodePath(".:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.4, 0.6666667, 1.370096),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0.96666664, 1.0923177, 1.1909935, 1.2965536, 1.4021137, 1.5398008),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 1.998, -24.555), Vector3(0, 1.998, -42.96264), Vector3(0, 1.998, -23.822618)]
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.3281219), Vector3(0, 0, -0.24085544), Vector3(0, 0, 0.09250245), Vector3(0, 0, -0.036651913), Vector3(0, 0, 0)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_q6r6c"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0h7mo"]
 _data = {
-&"RESET": SubResource("Animation_epypp"),
-&"attack": SubResource("Animation_0hol4")
+&"RESET": SubResource("Animation_hqns4"),
+&"attack_orange": SubResource("Animation_x0ka3")
+}
+
+[sub_resource type="Animation" id="Animation_0h7mo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(21.683, 1.935, -26.989553)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_nr8wp"]
+resource_name = "attack_blue"
+length = 3.4333334
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.091698, 3.0304031),
+"transitions": PackedFloat32Array(3.0314329, 0.4061261, 1),
+"update": 0,
+"values": [Vector3(21.683, 1.935, -26.989553), Vector3(21.683, 1.935, -66.64149), Vector3(21.683, 1.935, -26.99)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.0333333, 1.1488857, 1.2209818, 1.2907522, 1.3419172, 1.3977334, 1.4930863),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.13962634), Vector3(0, 0, -0.17453292), Vector3(0, 0, 0.08726646), Vector3(0, 0, -0.040142573), Vector3(0, 0, 0.02617994), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_d2bti"]
+_data = {
+&"RESET": SubResource("Animation_0h7mo"),
+&"attack_blue": SubResource("Animation_nr8wp")
 }
 
 [node name="Node2D" type="Node2D" unique_id=519171290]
+position = Vector2(0, 1.998)
 script = ExtResource("1_wtcfe")
 
 [node name="HTTPRequest" type="HTTPRequest" parent="." unique_id=1338613847]
@@ -198,7 +345,6 @@ debug_color = Color(0.8377409, 0.8371174, 0.8315217, 0.41960785)
 
 [node name="Enemy" type="StaticBody3D" parent="." unique_id=1374640004]
 transform = Transform3D(6.81, 0, 0, 0, 6.81, 0, 0, 0, 6.81, 5.3601847, -19.652422, -67.69084)
-script = ExtResource("2_4d7sh")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Enemy" unique_id=1308014217]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7623446, 5.8153076, -0.9852171)
@@ -235,21 +381,29 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.998, -24.555)
 script = ExtResource("3_q6r6c")
 line_name = "Green"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="greenline" unique_id=437037788]
-libraries/ = SubResource("AnimationLibrary_q6r6c")
-speed_scale = 0.714
+[node name="AnimationPlayer" parent="greenline" unique_id=1179685689 instance=ExtResource("6_4d7sh")]
 
 [node name="redline" parent="." unique_id=82451194 instance=ExtResource("5_q6r6c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.589, 1.9352875, -27.284311)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.589, 1.998, -24.555)
 script = ExtResource("3_q6r6c")
 line_name = "Red"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="redline" unique_id=2067334384]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_hqns4")
 
 [node name="orangeline" parent="." unique_id=1932407106 instance=ExtResource("7_rj586")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.663, 1.935, -26.837805)
 script = ExtResource("3_q6r6c")
 line_name = "Orange"
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="orangeline" unique_id=561931983]
+libraries/ = SubResource("AnimationLibrary_0h7mo")
+
 [node name="blueline" parent="." unique_id=917154609 instance=ExtResource("8_4d7sh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.683, 1.935, -26.989553)
 script = ExtResource("3_q6r6c")
 line_name = "Blue"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="blueline" unique_id=325820540]
+libraries/ = SubResource("AnimationLibrary_d2bti")
