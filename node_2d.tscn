@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://dt3nc4our1mgp" path="res://scripts/main.gd" id="1_wtcfe"]
 [ext_resource type="PackedScene" uid="uid://cjlq260cxfpcf" path="res://assets/character/green/greenline.fbx" id="2_0hol4"]
-[ext_resource type="Script" uid="uid://c0sabsx3aj1ic" path="res://scripts/enemy.gd" id="2_4d7sh"]
 [ext_resource type="PackedScene" uid="uid://b13j32stagft" path="res://assets/ui/line_card.tscn" id="2_4d7sh"]
 [ext_resource type="Texture2D" uid="uid://b5b175ditlmdj" path="res://assets/textures/febrianes86-fire-9534823.svg" id="2_hqns4"]
 [ext_resource type="PackedScene" uid="uid://dd1n2bcj21j5q" path="res://assets/world/rails.fbx" id="3_epypp"]
@@ -12,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bosrbetdc2khk" path="res://assets/character/blue/blueline.fbx" id="8_4d7sh"]
 [ext_resource type="PackedScene" uid="uid://dkdfonhtr2ur0" path="res://assets/world/damage_emitter.tscn" id="10_ir8iy"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4d7sh"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ir8iy"]
 bg_color = Color(0.8509804, 0.8509804, 0.8509804, 1)
 border_width_left = 12
 border_width_top = 12
@@ -24,7 +23,7 @@ corner_radius_top_right = 24
 corner_radius_bottom_right = 24
 corner_radius_bottom_left = 24
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ir8iy"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hqns4"]
 bg_color = Color(0.8509804, 0.8509804, 0.8509804, 1)
 border_width_left = 12
 border_width_top = 12
@@ -36,7 +35,7 @@ corner_radius_top_right = 24
 corner_radius_bottom_right = 24
 corner_radius_bottom_left = 24
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hqns4"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x0ka3"]
 bg_color = Color(0.8509804, 0.8509804, 0.8509804, 1)
 border_width_left = 12
 border_width_top = 12
@@ -48,7 +47,7 @@ corner_radius_top_right = 24
 corner_radius_bottom_right = 24
 corner_radius_bottom_left = 24
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x0ka3"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0h7mo"]
 bg_color = Color(0.8509804, 0.8509804, 0.8509804, 1)
 border_width_left = 12
 border_width_top = 12
@@ -194,6 +193,20 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 0, 0.33684856), Vector3(0, 0, -0.27925268), Vector3(0, 0, 0.20943952), Vector3(0, 0, -0.13962634), Vector3(0, 0, 0.05235988), Vector3(0, 0, -0.017453292), Vector3(0, 0, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../damage_emitters/DamageEmitter")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.09),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"on_anim_hit"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_k73cj"]
@@ -479,7 +492,7 @@ columns = 2
 
 [node name="BlueCard" parent="HUD/UI/GridContainer" unique_id=1705578490 instance=ExtResource("2_4d7sh")]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_4d7sh")
+theme_override_styles/panel = SubResource("StyleBoxFlat_ir8iy")
 
 [node name="GreenCard" parent="HUD/UI/GridContainer" unique_id=1759957099 instance=ExtResource("2_4d7sh")]
 layout_mode = 2
@@ -551,8 +564,6 @@ debug_color = Color(0.8377409, 0.8371174, 0.8315217, 0.41960785)
 
 [node name="Enemy" type="StaticBody3D" parent="." unique_id=1374640004]
 transform = Transform3D(6.81, 0, 0, 0, 6.81, 0, 0, 0, 6.81, 5.3601847, -19.652422, -67.69084)
-script = ExtResource("2_4d7sh")
-size_scale_multiplier = 1.001
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Enemy" unique_id=1308014217]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7623446, 5.8153076, -0.9852171)
@@ -619,7 +630,7 @@ line_name = "Blue"
 libraries/ = SubResource("AnimationLibrary_d2bti")
 
 [node name="damage_emitters" type="Node3D" parent="." unique_id=1995572600]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -65.11871)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.8310547, -65.11871)
 
 [node name="DamageEmitter" parent="damage_emitters" unique_id=1755038919 node_paths=PackedStringArray("train") instance=ExtResource("10_ir8iy")]
 train = NodePath("../../greenline")
