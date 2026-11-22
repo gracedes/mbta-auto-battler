@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://c0sabsx3aj1ic" path="res://scripts/enemy.gd" id="3_hqns4"]
 [ext_resource type="Script" uid="uid://dtd6h1ynbhphw" path="res://scripts/train.gd" id="3_q6r6c"]
 [ext_resource type="PackedScene" uid="uid://gpp4wab8lcqs" path="res://assets/character/red/redline.fbx" id="5_q6r6c"]
+[ext_resource type="FontFile" uid="uid://b6jhkky7ko1p0" path="res://assets/ui/fonts/Inter-VariableFont_opsz,wght.ttf" id="6_nr8wp"]
 [ext_resource type="PackedScene" uid="uid://bdru7kinus1lt" path="res://assets/character/orange/orangeline.fbx" id="7_rj586"]
 [ext_resource type="PackedScene" uid="uid://bosrbetdc2khk" path="res://assets/character/blue/blueline.fbx" id="8_4d7sh"]
 [ext_resource type="PackedScene" uid="uid://dkdfonhtr2ur0" path="res://assets/world/damage_emitter.tscn" id="10_ir8iy"]
@@ -147,6 +148,32 @@ albedo_texture = ExtResource("2_hqns4")
 [sub_resource type="QuadMesh" id="QuadMesh_hqns4"]
 material = SubResource("StandardMaterial3D_hqns4")
 size = Vector2(1, 1.33)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rjqkl"]
+bg_color = Color(0.8509804, 0.8509804, 0.8509804, 1)
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color(0.4, 0.4, 0.4, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0h7mo"]
+bg_color = Color(0.22833622, 0.009448123, 0.022917993, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nr8wp"]
+bg_color = Color(0.78080314, 0.08443896, 0.14341635, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [sub_resource type="Animation" id="Animation_ta5nu"]
 length = 0.001
@@ -601,7 +628,7 @@ shape = SubResource("WorldBoundaryShape3D_2bg7k")
 debug_color = Color(0.8377409, 0.8371174, 0.8315217, 0.41960785)
 
 [node name="Enemy" type="StaticBody3D" parent="." unique_id=1374640004]
-transform = Transform3D(6.81, 0, 0, 0, 6.81, 0, 0, 0, 6.81, 5.3601847, -19.652422, -71.80223)
+transform = Transform3D(8.25, 0, 0, 0, 8.25, 0, 0, 0, 8.25, 11.430619, -22.403032, -68.57579)
 script = ExtResource("3_hqns4")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Enemy" unique_id=1308014217]
@@ -622,6 +649,69 @@ speed_scale = 0.68
 randomness = 0.19
 process_material = SubResource("ParticleProcessMaterial_ir8iy")
 draw_pass_1 = SubResource("QuadMesh_hqns4")
+
+[node name="EnemyCard" type="PanelContainer" parent="Enemy" unique_id=426857834]
+custom_minimum_size = Vector2(535, 172)
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -527.0
+offset_top = 209.0
+offset_right = 8.0
+offset_bottom = 381.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(0.76, 0.54)
+theme_override_styles/panel = SubResource("StyleBoxFlat_rjqkl")
+
+[node name="HPBar" type="ProgressBar" parent="Enemy" unique_id=1214514233]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(320, 29)
+offset_left = 1436.0
+offset_top = 770.0
+offset_right = 1756.0
+offset_bottom = 799.0
+size_flags_horizontal = 10
+size_flags_vertical = 4
+offset_transform_position = Vector2(100, 0)
+theme_override_colors/font_outline_color = Color(0.8392157, 0, 0, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_0h7mo")
+theme_override_styles/fill = SubResource("StyleBoxFlat_nr8wp")
+value = 50.0
+show_percentage = false
+
+[node name="HPLabel" type="Label" parent="Enemy/HPBar" unique_id=537419692]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 0
+offset_top = 22.0
+offset_right = 75.0
+offset_bottom = 66.0
+size_flags_stretch_ratio = 0.0
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, 40)
+theme_override_colors/font_color = Color(0.06, 0.06, 0.06, 1)
+theme_override_fonts/font = ExtResource("6_nr8wp")
+theme_override_font_sizes/font_size = 36
+text_direction = 1
+
+[node name="LevelLabel" type="Label" parent="Enemy/HPBar" unique_id=1366139995]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 0
+offset_left = 244.0
+offset_top = 21.0
+offset_right = 319.0
+offset_bottom = 65.0
+size_flags_stretch_ratio = 0.0
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, 40)
+theme_override_colors/font_color = Color(0.06, 0.06, 0.06, 1)
+theme_override_fonts/font = ExtResource("6_nr8wp")
+theme_override_font_sizes/font_size = 36
+text_direction = 2
 
 [node name="rails" parent="." unique_id=1029825365 instance=ExtResource("3_epypp")]
 transform = Transform3D(-1, 0, -3.166382e-06, 0, 1, 0, 1.509958e-07, 0, -20.97, -0.0014533997, 1.9981437, -4.781929)

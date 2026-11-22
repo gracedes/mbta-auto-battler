@@ -2,16 +2,16 @@ extends StaticBody3D
 
 
 @export var level: int = 1
-@export var size_scale_multiplier: float = 1.01
 
 var BASE_HP: int = 50
+var max_hp: float = BASE_HP
 var hp: float = BASE_HP
-var mi: Node
-var size: Vector3
+
+@onready var hp_bar: Range = %HPBar
+@onready var hp_label: Label = %HPLabel
+@onready var level_label: Label = %LevelLabel
 
 func _ready() -> void:
-	mi = $MeshInstance3D
-	size = mi.scale
 	get_tree().node_added.connect(_on_node_added)
 	_connect_emitters()
 
@@ -31,11 +31,17 @@ func _on_damage_dealt(damage):
 		print("enemy defeated! resetting")
 		level += 1
 		get_parent().save.call_deferred()
-		mi.scale *= size_scale_multiplier
-		mi.position.y *= 1 + (size_scale_multiplier - 1.0) / 2
-		hp = 50 + (10 + (level ** 0.75))
+		hp = 50 + (10 + (level ** 1.5))
+		max_hp = hp
+	set_stats()
+	
+func set_stats() -> void:
+	hp_bar.max_value = max_hp
+	hp_bar.value = hp
+	level_label.text = "Lvl: %d" % level
+	hp_label.text = "HP: %d" % hp
+	
 
 func apply_level(new_level: int) -> void:
 	level = new_level
 	hp = 50 + (10 + (level ** 0.75))
-	#mi.scale = self.size * (size_scale_multiplier ** level)
