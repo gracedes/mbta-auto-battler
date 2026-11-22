@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://4pqund3nukl7"]
 
-[ext_resource type="Script" uid="uid://bxoxkwab7raek" path="res://scripts/main.gd" id="1_wtcfe"]
+[ext_resource type="Script" uid="uid://dt3nc4our1mgp" path="res://scripts/main.gd" id="1_wtcfe"]
 [ext_resource type="PackedScene" uid="uid://cjlq260cxfpcf" path="res://assets/character/green/greenline.fbx" id="2_0hol4"]
+[ext_resource type="Script" uid="uid://c0sabsx3aj1ic" path="res://scripts/enemy.gd" id="2_4d7sh"]
+[ext_resource type="Texture2D" uid="uid://b5b175ditlmdj" path="res://assets/textures/febrianes86-fire-9534823.svg" id="2_hqns4"]
 [ext_resource type="PackedScene" uid="uid://dd1n2bcj21j5q" path="res://assets/world/rails.fbx" id="3_epypp"]
 [ext_resource type="Script" uid="uid://dtd6h1ynbhphw" path="res://scripts/train.gd" id="3_q6r6c"]
 [ext_resource type="PackedScene" uid="uid://gpp4wab8lcqs" path="res://assets/character/red/redline.fbx" id="5_q6r6c"]
@@ -35,7 +37,21 @@ albedo_color = Color(0.22118995, 0.36538273, 0.14086652, 1)
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2bg7k"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_ir8iy"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mt4rs"]
+transparency = 1
+albedo_texture = ExtResource("2_hqns4")
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_hhkj5"]
+material = SubResource("StandardMaterial3D_mt4rs")
+size = Vector2(3.8, 6.37)
+
+[sub_resource type="Gradient" id="Gradient_ir8iy"]
+colors = PackedColorArray(0.73, 0.5341167, 0.21900001, 1, 0.98, 0.28175002, 0.245, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ir8iy"]
+gradient = SubResource("Gradient_ir8iy")
 
 [sub_resource type="Curve" id="Curve_hqns4"]
 _data = [Vector2(0, 1), 0.0, -0.030384306, 0, 0, Vector2(1, 0.14661658), 0.0, 0.0, 0, 0]
@@ -59,8 +75,19 @@ gravity = Vector3(0, 2, 0)
 linear_accel_min = 1.5599977
 linear_accel_max = 26.559998
 scale_curve = SubResource("CurveTexture_ir8iy")
+color = Color(0.9965045, 0.17576215, 0.20317513, 1)
+color_ramp = SubResource("GradientTexture1D_ir8iy")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hqns4"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("2_hqns4")
 
 [sub_resource type="QuadMesh" id="QuadMesh_hqns4"]
+material = SubResource("StandardMaterial3D_hqns4")
+size = Vector2(1, 1.33)
 
 [sub_resource type="Animation" id="Animation_epypp"]
 length = 0.001
@@ -136,8 +163,23 @@ projection = 1
 fov = 77.71061
 size = 100.09398
 
-[node name="AreaLight3D" type="AreaLight3D" parent="." unique_id=1176750802]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 60.970352, 32.41156)
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=562164116]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 108.71648, -70.97505)
+light_energy = 4.36
+light_specular = 0.0
+shadow_opacity = 0.82
+shadow_blur = 1.55
+omni_range = 717.2533
+omni_attenuation = 0.0
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="." unique_id=1673497561]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.729652, 12.596077, 15.707306)
+light_energy = 0.84
+light_specular = 0.0
+shadow_opacity = 0.82
+shadow_blur = 1.55
+omni_range = 717.2533
+omni_attenuation = 0.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=295040243]
 environment = SubResource("Environment_0e48y")
@@ -156,16 +198,17 @@ debug_color = Color(0.8377409, 0.8371174, 0.8315217, 0.41960785)
 
 [node name="Enemy" type="StaticBody3D" parent="." unique_id=1374640004]
 transform = Transform3D(6.81, 0, 0, 0, 6.81, 0, 0, 0, 6.81, 5.3601847, -19.652422, -67.69084)
+script = ExtResource("2_4d7sh")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Enemy" unique_id=1308014217]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1752539, 0)
-mesh = SubResource("CapsuleMesh_ir8iy")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7623446, 5.8153076, -0.9852171)
+mesh = SubResource("QuadMesh_hhkj5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy" unique_id=211693415]
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Enemy" unique_id=620033541]
-transform = Transform3D(2.7571, 0, 0, 0, 5.171268, 0, 0, 0, 1, 0, 3.5215197, 0)
-amount = 90
+transform = Transform3D(1.389455, 0, 0.9807886, 0, 3.2658432, 0, -2.2035673, 0, 0.61843437, 1.1223432, 6.376416, 0.09000015)
+amount = 250
 amount_ratio = 0.9292
 sub_emitter = NodePath(".")
 lifetime = 1.12
