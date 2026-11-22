@@ -8,6 +8,8 @@ func _ready() -> void:
 	set_active(false)
 	if location_manager:
 		location_manager.nearby_lines_updated.connect(_on_nearby_lines_updated)
+	else:
+		print("WARNING: location_manager not assigned on ", name)
 
 func set_active(is_here: bool) -> void:
 	visible = is_here
