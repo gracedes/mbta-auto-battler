@@ -23,13 +23,12 @@ sky_material = SubResource("ProceduralSkyMaterial_0e48y")
 [sub_resource type="Environment" id="Environment_0e48y"]
 background_mode = 2
 background_color = Color(0.20614836, 0.5218468, 0.4711792, 1)
-background_energy_multiplier = 1.25
 sky = SubResource("Sky_epypp")
-sky_custom_fov = 75.4
+sky_custom_fov = 85.7
 reflected_light_source = 1
 adjustment_enabled = true
-adjustment_brightness = 1.13
-adjustment_contrast = 1.075
+adjustment_brightness = 1.04
+adjustment_contrast = 1.035
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_4r7k6"]
 
@@ -40,17 +39,28 @@ albedo_color = Color(0.22118995, 0.36538273, 0.14086652, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ir8iy"]
 
+[sub_resource type="Curve" id="Curve_hqns4"]
+_data = [Vector2(0, 1), 0.0, -0.030384306, 0, 0, Vector2(1, 0.14661658), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ir8iy"]
+curve = SubResource("Curve_hqns4")
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ir8iy"]
-lifetime_randomness = 0.13
+lifetime_randomness = 0.12
 particle_flag_rotate_y = true
-emission_shape = 6
-emission_ring_axis = Vector3(0, 0, 1)
-emission_ring_height = 1.0
-emission_ring_radius = 2.0
-emission_ring_inner_radius = 0.0
-emission_ring_cone_angle = 90.0
-inherit_velocity_ratio = 0.369
+emission_shape = 1
+emission_sphere_radius = 1.0
+angle_min = -1.9999893
+angle_max = 2.0000107
+inherit_velocity_ratio = 0.53
+spread = 84.79
+angular_velocity_min = -1.6093254e-05
+angular_velocity_max = 39.999985
 gravity = Vector3(0, 2, 0)
+linear_accel_min = 1.5599977
+linear_accel_max = 26.559998
+scale_curve = SubResource("CurveTexture_ir8iy")
 
 [sub_resource type="QuadMesh" id="QuadMesh_hqns4"]
 
@@ -147,7 +157,7 @@ shape = SubResource("WorldBoundaryShape3D_2bg7k")
 debug_color = Color(0.8377409, 0.8371174, 0.8315217, 0.41960785)
 
 [node name="Enemy" type="StaticBody3D" parent="." unique_id=1374640004]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.3601847, 0, -67.69084)
+transform = Transform3D(6.81, 0, 0, 0, 6.81, 0, 0, 0, 6.81, 5.3601847, -19.652422, -67.69084)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Enemy" unique_id=1308014217]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1752539, 0)
@@ -156,8 +166,14 @@ mesh = SubResource("CapsuleMesh_ir8iy")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy" unique_id=211693415]
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Enemy" unique_id=620033541]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5215197, 0)
+transform = Transform3D(2.7571, 0, 0, 0, 5.171268, 0, 0, 0, 1, 0, 3.5215197, 0)
+amount = 90
+amount_ratio = 0.9292
 sub_emitter = NodePath(".")
+lifetime = 1.12
+preprocess = 1.39
+speed_scale = 0.68
+randomness = 0.19
 process_material = SubResource("ParticleProcessMaterial_ir8iy")
 draw_pass_1 = SubResource("QuadMesh_hqns4")
 
