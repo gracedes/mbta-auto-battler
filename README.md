@@ -1,3 +1,5 @@
+![title screen for Next Stop: Fire!](git-assets/Frame_1.png)
+
 # Next Stop: Fire!
 An MBTA inspired auto-battler by Nat Hem and Grace Desrochers
 ## Goal
