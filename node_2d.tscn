@@ -15,10 +15,12 @@
 [ext_resource type="PackedScene" uid="uid://bdru7kinus1lt" path="res://assets/character/orange/orangeline.fbx" id="7_rj586"]
 [ext_resource type="PackedScene" uid="uid://bosrbetdc2khk" path="res://assets/character/blue/blueline.fbx" id="8_4d7sh"]
 [ext_resource type="PackedScene" uid="uid://dkdfonhtr2ur0" path="res://assets/world/damage_emitter.tscn" id="10_ir8iy"]
+[ext_resource type="Texture2D" uid="uid://ckaewq5vjenq8" path="res://assets/character/angy.png" id="10_rjqkl"]
 [ext_resource type="AudioStream" uid="uid://dttjdorvpftl6" path="res://assets/sounds/525105__jomse__plasticimpactb5.wav" id="13_0h7mo"]
 [ext_resource type="Script" uid="uid://cp18o7ujl432" path="res://scripts/loading_screen.gd" id="15_d2bti"]
 [ext_resource type="AudioStream" uid="uid://cbo1ao4enwkua" path="res://assets/sounds/478197__jonnyruss01__click_1.wav" id="16_ta5nu"]
 
+<<<<<<< HEAD
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2bg7k"]
 bg_color = Color(0.7602972, 0.76029724, 0.76029706, 1)
 corner_radius_top_left = 100
@@ -63,6 +65,8 @@ corner_radius_top_right = 24
 corner_radius_bottom_right = 24
 corner_radius_bottom_left = 24
 
+=======
+>>>>>>> ba96825 (the fire has a face now D:)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fs4d3"]
 bg_color = Color(0.8509804, 0.8509804, 0.8509804, 1)
 border_width_left = 12
@@ -87,8 +91,33 @@ corner_radius_top_right = 24
 corner_radius_bottom_right = 24
 corner_radius_bottom_left = 24
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ei405"]
+bg_color = Color(0.8509804, 0.8509804, 0.8509804, 1)
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color(0.4, 0.4, 0.4, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e8dv2"]
+bg_color = Color(0.8509804, 0.8509804, 0.8509804, 1)
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color(0.4, 0.4, 0.4, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4r7k6"]
 bg_color = Color(0.34100002, 0.40021664, 0.55, 0.3647059)
+draw_center = false
 corner_radius_top_left = 115
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0e48y"]
@@ -643,23 +672,23 @@ columns = 2
 
 [node name="BlueCard" parent="HUD/UI/GridContainer" unique_id=1705578490 instance=ExtResource("2_4d7sh")]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_flf07")
+theme_override_styles/panel = SubResource("StyleBoxFlat_fs4d3")
 
 [node name="GreenCard" parent="HUD/UI/GridContainer" unique_id=1759957099 instance=ExtResource("2_4d7sh")]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_k73cj")
+theme_override_styles/panel = SubResource("StyleBoxFlat_7vxoj")
 line_name = "Green"
 border_color = Color(0, 0.5176471, 0.23921569, 1)
 
 [node name="OrangeCard" parent="HUD/UI/GridContainer" unique_id=37719455 instance=ExtResource("2_4d7sh")]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_fs4d3")
+theme_override_styles/panel = SubResource("StyleBoxFlat_ei405")
 line_name = "Orange"
 border_color = Color(0.92941177, 0.54509807, 0, 1)
 
 [node name="RedCard" parent="HUD/UI/GridContainer" unique_id=823857636 instance=ExtResource("2_4d7sh")]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_7vxoj")
+theme_override_styles/panel = SubResource("StyleBoxFlat_e8dv2")
 line_name = "Red"
 border_color = Color(0.85490197, 0.16078432, 0.10980392, 1)
 
@@ -748,6 +777,10 @@ script = ExtResource("3_hqns4")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Enemy" unique_id=1308014217]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7623446, 5.8153076, -0.9852171)
 mesh = SubResource("QuadMesh_hhkj5")
+
+[node name="Sprite3D" type="Sprite3D" parent="Enemy/MeshInstance3D" unique_id=2029014172]
+transform = Transform3D(0.09000001, 0, 0.15588458, 0, 0.17999999, 0, -0.15588458, 0, 0.09000001, 2.666667, 0, 1.4545455)
+texture = ExtResource("10_rjqkl")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy" unique_id=211693415]
 shape = SubResource("BoxShape3D_4d7sh")
