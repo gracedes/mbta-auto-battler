@@ -5,6 +5,7 @@ signal nearby_lines_updated(active_lines: Array)
 signal xp_gained(route, xp)
 signal location_error(code: int)   # 1 = denied, 2 = unavailable, 3 = timeout
 signal station_visited(station_name: String, is_new: bool)
+signal routes_loaded
 
 const API_ROOT = "https://mbta.gracie.foo"
 var headers = []
@@ -46,6 +47,9 @@ var station_cooldown = true
 const PING_INTERVAL := 15.0
 var ping_timer := PING_INTERVAL
 
+var _started := false
+var _routes_announced := false
+
 var XP_GAIN = 25
 @export var visited = {}
 @export var unlocked_trains = {}
@@ -55,16 +59,23 @@ var _pos_cb = null
 var _pos_err_cb = null
 
 func _ready():
+	$LoadingScreen.start_game.connect(_on_start_game)
 	create_routes_list()
 	_load_save()
 	_setup_geo()
 
 func _process(delta: float) -> void:
+	if not _started:
+		return
 	ping_timer += delta
 	if ping_timer >= PING_INTERVAL:
 		ping_timer = 0.0
 		print("pinging location")
 		loc_ping()
+
+func _on_start_game() -> void:
+	_started = true
+	ping_timer = PING_INTERVAL   # fire the first ping immediately, like a fresh boot
 
 func _setup_geo() -> void:
 	if OS.get_name() != "Web":
@@ -78,30 +89,37 @@ func _setup_geo() -> void:
 	_pos_err_cb = JavaScriptBridge.create_callback(_on_position_error)
 
 func create_routes_list():
+	$HTTPRequest.timeout = 10.0
 	$HTTPRequest.request_completed.connect(_populate_routes)
 	_start_next()
 
 func _start_next() -> void:
 	if pending_routes.is_empty():
+		if not _routes_announced:
+			_routes_announced = true
+			routes_loaded.emit()
 		return
 	var route = pending_routes[0]
 	var filter = ROUTE_FILTERS[route]
 	var err = $HTTPRequest.request(API_ROOT + "/stops?filter%5Broute%5D=" + filter)
 	if err != OK:
 		push_error("send %s failed: %s" % [route, error_string(err)])
+		pending_routes.pop_front()
+		_start_next()
 		return
 	pending_routes.pop_front()
 	current_route = route
 
 func _populate_routes(_result, _response_code, _headers, body):
 	var json = JSON.parse_string(body.get_string_from_utf8())
-	for station in json["data"]:
-		@warning_ignore("shadowed_variable_base_class")
-		var name = station["attributes"]["name"]
-		if not name in routes:
-			routes[name] = [current_route]
-		elif current_route not in routes[name]:
-			routes[name].append(current_route)
+	if json != null and "data" in json:
+		for station in json["data"]:
+			@warning_ignore("shadowed_variable_base_class")
+			var name = station["attributes"]["name"]
+			if not name in routes:
+				routes[name] = [current_route]
+			elif current_route not in routes[name]:
+				routes[name].append(current_route)
 	_start_next()
 
 func loc_ping():
