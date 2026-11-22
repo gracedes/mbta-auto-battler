@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://bsw71d3g5pbes"]
+
+[ext_resource type="Script" uid="uid://cvyffjj35hji1" path="res://assets/ui/notif_card.gd" id="1_tk38i"]
+[ext_resource type="FontFile" uid="uid://b6jhkky7ko1p0" path="res://assets/ui/fonts/Inter-VariableFont_opsz,wght.ttf" id="2_dkijx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tk38i"]
+bg_color = Color(0.8509804, 0.8509804, 0.8509804, 1)
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color(0.4, 0.4, 0.4, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[node name="NotifCard" type="PanelContainer" unique_id=1705578490]
+custom_minimum_size = Vector2(535, 172)
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_tk38i")
+script = ExtResource("1_tk38i")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=46199378]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=306111522]
+layout_mode = 2
+
+[node name="StationNotifLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=2138571204]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 0
+size_flags_stretch_ratio = 0.0
+theme_override_colors/font_color = Color(0.06, 0.06, 0.06, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_dkijx")
+theme_override_font_sizes/font_size = 36
+horizontal_alignment = 1
+
+[node name="StationNameLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1098437053]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 0
+size_flags_stretch_ratio = 0.0
+theme_override_colors/font_color = Color(0.28668356, 0.2866836, 0.28668362, 1)
+theme_override_fonts/font = ExtResource("2_dkijx")
+theme_override_font_sizes/font_size = 36
+horizontal_alignment = 1

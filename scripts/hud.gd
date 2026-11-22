@@ -6,28 +6,27 @@ extends CanvasLayer
 	"Orange": $UI/GridContainer/OrangeCard,
 	"Red": $UI/GridContainer/RedCard,
 }
+@onready var notif_card = $UI/StationNotifBox
 
 var train_nodes := {}
 
 func _ready() -> void:
-	# Wait one frame so all train nodes finish their _ready() and join the "trains" group
 	await get_tree().process_frame
 	for train in get_tree().get_nodes_in_group("trains"):
 		if train.line_name in line_cards:
 			train_nodes[train.line_name] = train
 
-	# Unlock cards whenever main.gd unlocks a train line
 	var main := get_parent()
 	if main.has_signal("nearby_lines_updated"):
 		main.nearby_lines_updated.connect(_on_nearby_lines_updated)
+	if main.has_signal("station_visited"):
+		main.station_visited.connect(_on_station_visited)
 
 func _process(_delta: float) -> void:
-	# Keep XP bars, Lvl, and DPS synced with the actual train nodes (including debug cheats!)
 	for route in train_nodes:
 		var train = train_nodes[route]
 		var card = line_cards[route]
 		
-		# Unlock automatically if the train is visible or gained XP via debug keys
 		if not card.is_unlocked and (train.visible or train.xp > 25):
 			card.unlock()
 			
@@ -40,3 +39,6 @@ func _on_nearby_lines_updated(active_lines: Array) -> void:
 	for route in active_lines:
 		if route in line_cards:
 			line_cards[route].unlock()
+			
+func _on_station_visited(station_name: String, is_new: bool) -> void:
+	notif_card.show_notification(station_name, is_new )
