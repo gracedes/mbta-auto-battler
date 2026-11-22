@@ -4,6 +4,55 @@
 [ext_resource type="PackedScene" uid="uid://cjlq260cxfpcf" path="res://assets/character/green/greenline.fbx" id="2_0hol4"]
 [ext_resource type="PackedScene" uid="uid://dd1n2bcj21j5q" path="res://assets/world/rails.fbx" id="3_epypp"]
 [ext_resource type="Script" uid="uid://dtd6h1ynbhphw" path="res://assets/character/green/greenline.gd" id="3_q6r6c"]
+[ext_resource type="PackedScene" uid="uid://gpp4wab8lcqs" path="res://assets/character/red/redline.fbx" id="5_q6r6c"]
+[ext_resource type="Script" uid="uid://ur1si14kmlbp" path="res://assets/character/red/redline.gd" id="6_kdubu"]
+[ext_resource type="PackedScene" uid="uid://bdru7kinus1lt" path="res://assets/character/orange/orangeline.fbx" id="7_rj586"]
+[ext_resource type="PackedScene" uid="uid://bosrbetdc2khk" path="res://assets/character/blue/blueline.fbx" id="8_4d7sh"]
+[ext_resource type="Script" uid="uid://yxl118o7kcu6" path="res://assets/character/orange/orangeline.gd" id="8_ir8iy"]
+[ext_resource type="Script" uid="uid://d3cy707fqfc07" path="res://assets/character/blue/blueline.gd" id="9_4d7sh"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0e48y"]
+sky_top_color = Color(0.2535078, 0.4738986, 0.62155396, 1)
+sky_horizon_color = Color(0.674836, 0.6512496, 0.63957185, 1)
+sky_curve = 0.10606606
+sun_angle_max = 144.94
+
+[sub_resource type="Sky" id="Sky_epypp"]
+sky_material = SubResource("ProceduralSkyMaterial_0e48y")
+
+[sub_resource type="Environment" id="Environment_0e48y"]
+background_mode = 2
+background_color = Color(0.20614836, 0.5218468, 0.4711792, 1)
+background_energy_multiplier = 1.25
+sky = SubResource("Sky_epypp")
+sky_custom_fov = 75.4
+reflected_light_source = 1
+adjustment_enabled = true
+adjustment_brightness = 1.13
+adjustment_contrast = 1.075
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_4r7k6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4r7k6"]
+albedo_color = Color(0.22118995, 0.36538273, 0.14086652, 1)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2bg7k"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ir8iy"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ir8iy"]
+lifetime_randomness = 0.13
+particle_flag_rotate_y = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 2.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+inherit_velocity_ratio = 0.369
+gravity = Vector3(0, 2, 0)
+
+[sub_resource type="QuadMesh" id="QuadMesh_hqns4"]
 
 [sub_resource type="Animation" id="Animation_epypp"]
 length = 0.001
@@ -66,33 +115,6 @@ _data = {
 &"attack": SubResource("Animation_0hol4")
 }
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_4r7k6"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4r7k6"]
-albedo_color = Color(0.22118995, 0.36538273, 0.14086652, 1)
-
-[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2bg7k"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0e48y"]
-sky_top_color = Color(0.2535078, 0.4738986, 0.62155396, 1)
-sky_horizon_color = Color(0.674836, 0.6512496, 0.63957185, 1)
-sky_curve = 0.10606606
-sun_angle_max = 144.94
-
-[sub_resource type="Sky" id="Sky_epypp"]
-sky_material = SubResource("ProceduralSkyMaterial_0e48y")
-
-[sub_resource type="Environment" id="Environment_0e48y"]
-background_mode = 2
-background_color = Color(0.20614836, 0.5218468, 0.4711792, 1)
-background_energy_multiplier = 1.25
-sky = SubResource("Sky_epypp")
-sky_custom_fov = 75.4
-reflected_light_source = 1
-adjustment_enabled = true
-adjustment_brightness = 1.13
-adjustment_contrast = 1.075
-
 [node name="Node2D" type="Node2D" unique_id=519171290]
 script = ExtResource("1_wtcfe")
 
@@ -100,8 +122,56 @@ script = ExtResource("1_wtcfe")
 use_threads = true
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1322596672]
-transform = Transform3D(0.7716232, 0.159262, -0.61581916, 0, 0.9681475, 0.2503805, 0.6360799, -0.1931994, 0.7470451, -20.619001, 14.169964, -3.7985945)
+transform = Transform3D(0.39236966, -0.39119896, 0.83247185, 0, 0.90505, 0.42530522, -0.9198076, -0.16687685, 0.35511416, 118.51138, 71.25314, 6.9839134)
+keep_aspect = 0
+projection = 1
 fov = 77.71061
+size = 100.09398
+
+[node name="AreaLight3D" type="AreaLight3D" parent="." unique_id=1176750802]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 60.970352, 32.41156)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=295040243]
+environment = SubResource("Environment_0e48y")
+
+[node name="Ground" type="StaticBody3D" parent="." unique_id=1113747816]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" unique_id=2130203677]
+transform = Transform3D(625.86, 0, 0, 0, 625.86, 0, 0, 0, 625.86, 0, 0, 0)
+mesh = SubResource("PlaneMesh_4r7k6")
+surface_material_override/0 = SubResource("StandardMaterial3D_4r7k6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground" unique_id=321809364]
+transform = Transform3D(99.64, 0, 0, 0, 99.64, 0, 0, 0, 99.64, 0, -0.016040802, -28.737028)
+shape = SubResource("WorldBoundaryShape3D_2bg7k")
+debug_color = Color(0.8377409, 0.8371174, 0.8315217, 0.41960785)
+
+[node name="Enemy" type="StaticBody3D" parent="." unique_id=1374640004]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.3601847, 0, -67.69084)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Enemy" unique_id=1308014217]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1752539, 0)
+mesh = SubResource("CapsuleMesh_ir8iy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy" unique_id=211693415]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Enemy" unique_id=620033541]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5215197, 0)
+sub_emitter = NodePath(".")
+process_material = SubResource("ParticleProcessMaterial_ir8iy")
+draw_pass_1 = SubResource("QuadMesh_hqns4")
+
+[node name="rails" parent="." unique_id=1029825365 instance=ExtResource("3_epypp")]
+transform = Transform3D(-1, 0, -3.166382e-06, 0, 1, 0, 1.509958e-07, 0, -20.97, -0.0014533997, 1.9981437, -4.781929)
+
+[node name="rails2" parent="." unique_id=1331645896 instance=ExtResource("3_epypp")]
+transform = Transform3D(-1, 0, -3.166382e-06, 0, 1, 0, 1.509958e-07, 0, -20.97, -10.588873, 1.9981437, -4.781929)
+
+[node name="rails3" parent="." unique_id=958684899 instance=ExtResource("3_epypp")]
+transform = Transform3D(-1, 0, -3.166382e-06, 0, 1, 0, 1.509958e-07, 0, -20.97, 20.82053, 1.9981437, -4.781929)
+
+[node name="rails4" parent="." unique_id=481925957 instance=ExtResource("3_epypp")]
+transform = Transform3D(-1, 0, -3.166382e-06, 0, 1, 0, 1.509958e-07, 0, -20.97, 10.66259, 1.9981437, -4.781929)
 
 [node name="greenline" parent="." unique_id=1956945032 instance=ExtResource("2_0hol4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.998, -24.555)
@@ -111,32 +181,17 @@ script = ExtResource("3_q6r6c")
 libraries/ = SubResource("AnimationLibrary_q6r6c")
 speed_scale = 0.714
 
-[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1113747816]
+[node name="redline" parent="." unique_id=82451194 node_paths=PackedStringArray("location_manager") instance=ExtResource("5_q6r6c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.589, 1.9352875, -27.284311)
+script = ExtResource("6_kdubu")
+location_manager = NodePath("..")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=2130203677]
-transform = Transform3D(625.86, 0, 0, 0, 625.86, 0, 0, 0, 625.86, 0, 0, 0)
-mesh = SubResource("PlaneMesh_4r7k6")
-surface_material_override/0 = SubResource("StandardMaterial3D_4r7k6")
+[node name="orangeline" parent="." unique_id=1932407106 node_paths=PackedStringArray("location_manager") instance=ExtResource("7_rj586")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.663, 1.935, -26.837805)
+script = ExtResource("8_ir8iy")
+location_manager = NodePath("..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=321809364]
-transform = Transform3D(99.64, 0, 0, 0, 99.64, 0, 0, 0, 99.64, 0, -0.016040802, -28.737028)
-shape = SubResource("WorldBoundaryShape3D_2bg7k")
-debug_color = Color(0.8377409, 0.8371174, 0.8315217, 0.41960785)
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=295040243]
-environment = SubResource("Environment_0e48y")
-
-[node name="AreaLight3D" type="AreaLight3D" parent="." unique_id=1176750802]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 60.970352, 32.41156)
-
-[node name="rails" parent="." unique_id=1029825365 instance=ExtResource("3_epypp")]
-transform = Transform3D(-1, 0, -3.166382e-06, 0, 1, 0, 1.509958e-07, 0, -20.97, -0.0014533997, 1.9981437, -44.141)
-
-[node name="rails2" parent="." unique_id=1331645896 instance=ExtResource("3_epypp")]
-transform = Transform3D(-1, 0, -3.166382e-06, 0, 1, 0, 1.509958e-07, 0, -20.97, -10.588873, 1.9981437, -44.141)
-
-[node name="rails3" parent="." unique_id=958684899 instance=ExtResource("3_epypp")]
-transform = Transform3D(-1, 0, -3.166382e-06, 0, 1, 0, 1.509958e-07, 0, -20.97, 20.82053, 1.9981437, -44.141)
-
-[node name="rails4" parent="." unique_id=481925957 instance=ExtResource("3_epypp")]
-transform = Transform3D(-1, 0, -3.166382e-06, 0, 1, 0, 1.509958e-07, 0, -20.97, 10.66259, 1.9981437, -44.141)
+[node name="blueline" parent="." unique_id=917154609 node_paths=PackedStringArray("location_manager") instance=ExtResource("8_4d7sh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.683, 1.935, -26.989553)
+script = ExtResource("9_4d7sh")
+location_manager = NodePath("..")
