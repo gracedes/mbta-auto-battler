@@ -4,6 +4,7 @@ extends Node2D
 signal nearby_lines_updated(active_lines: Array)
 signal xp_gained(route, xp)
 signal location_error(code: int)   # 1 = denied, 2 = unavailable, 3 = timeout
+signal station_visited(station_name: String, is_new: bool)
 
 const API_ROOT = "https://mbta.gracie.foo"
 var headers = []
