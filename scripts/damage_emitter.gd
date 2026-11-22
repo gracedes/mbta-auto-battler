@@ -2,6 +2,7 @@ extends Node3D
 
 signal send_damage(damage)
 
+@warning_ignore("shadowed_global_identifier")
 const DamageNumber := preload("res://scripts/damage_number.gd")
 @export var train: Node
 
@@ -29,6 +30,7 @@ func spawn_damage(amount: float) -> void:
 		return
 	var screen_pos := cam.unproject_position(global_position)
 	var popup := DamageNumber.new()
+	@warning_ignore("narrowing_conversion")
 	popup.amount = amount
 	popup.start_pos = screen_pos + Vector2(
 		randf_range(-20.0, 20.0), randf_range(-20.0, 20.0)
