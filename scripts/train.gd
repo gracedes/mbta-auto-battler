@@ -4,6 +4,13 @@ signal damage_enemy(damage)
 
 @export var line_name = ""     # "Green", "Red", "Orange", or "Blue"
 var location_manager: Node
+var anim_player: Node
+var anim_mapping = {
+	"Green": "attack",
+	"Red": "attack_red",
+	"Orange": "attack_orange",
+	"Blue": "attack_blue"
+}
 
 var attack_timer = 0.0
 var ATTACK_TIMER_MAX = 5.0
@@ -16,6 +23,7 @@ var rof: float
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	add_to_group("trains")
+	anim_player = $AnimationPlayer
 	calculate_vars()
 	var root = get_parent()
 	location_manager = get_parent()
@@ -35,7 +43,10 @@ func _process(delta: float) -> void:
 	if attack_timer < ATTACK_TIMER_MAX - rof:
 		attack_timer += delta
 	else:
-		if visible: damage_enemy.emit(dps * attack_timer)
+		if visible:
+			if line_name in anim_mapping:
+				anim_player.play(anim_mapping[line_name])
+			damage_enemy.emit(dps * attack_timer)
 		attack_timer = 0.0
 
 func _on_xp_gain(route, xp_increase) -> void:
