@@ -23,6 +23,7 @@ func _on_damage_dealt(damage):
 func on_anim_hit() -> void:
 	send_damage.emit(last_damage)
 	spawn_damage(last_damage)
+	$HitSound.play()
 
 func spawn_damage(amount: float) -> void:
 	var cam := get_viewport().get_camera_3d()

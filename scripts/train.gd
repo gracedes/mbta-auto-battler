@@ -66,8 +66,8 @@ func _on_xp_gain(route, xp_increase) -> void:
 
 func calculate_vars() -> void:
 	level = (xp / 250) + 1
-	dps = 2.0 * (level ** (2.0 / 3.0))
-	rof = min(0.1 * (level / 5), ATTACK_TIMER_MAX - 0.2)
+	dps = 5.0 * (level ** (2.0 / 3.0))
+	rof = min(0.75 * (level / 5), ATTACK_TIMER_MAX - 0.2)
 
 func _input(_event):
 	debug_inputs()

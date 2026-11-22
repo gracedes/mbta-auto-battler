@@ -12,44 +12,45 @@
 [ext_resource type="PackedScene" uid="uid://bdru7kinus1lt" path="res://assets/character/orange/orangeline.fbx" id="7_rj586"]
 [ext_resource type="PackedScene" uid="uid://bosrbetdc2khk" path="res://assets/character/blue/blueline.fbx" id="8_4d7sh"]
 [ext_resource type="PackedScene" uid="uid://dkdfonhtr2ur0" path="res://assets/world/damage_emitter.tscn" id="10_ir8iy"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x0ka3"]
-bg_color = Color(0.8509804, 0.8509804, 0.8509804, 1)
-border_width_left = 12
-border_width_top = 12
-border_width_right = 12
-border_width_bottom = 12
-border_color = Color(0.4, 0.4, 0.4, 1)
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0h7mo"]
-bg_color = Color(0.8509804, 0.8509804, 0.8509804, 1)
-border_width_left = 12
-border_width_top = 12
-border_width_right = 12
-border_width_bottom = 12
-border_color = Color(0.4, 0.4, 0.4, 1)
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nr8wp"]
-bg_color = Color(0.8509804, 0.8509804, 0.8509804, 1)
-border_width_left = 12
-border_width_top = 12
-border_width_right = 12
-border_width_bottom = 12
-border_color = Color(0.4, 0.4, 0.4, 1)
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
+[ext_resource type="AudioStream" uid="uid://dttjdorvpftl6" path="res://assets/sounds/525105__jomse__plasticimpactb5.wav" id="13_0h7mo"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d2bti"]
+bg_color = Color(0.8509804, 0.8509804, 0.8509804, 1)
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color(0.4, 0.4, 0.4, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ta5nu"]
+bg_color = Color(0.8509804, 0.8509804, 0.8509804, 1)
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color(0.4, 0.4, 0.4, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_flf07"]
+bg_color = Color(0.8509804, 0.8509804, 0.8509804, 1)
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color(0.4, 0.4, 0.4, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k73cj"]
 bg_color = Color(0.8509804, 0.8509804, 0.8509804, 1)
 border_width_left = 12
 border_width_top = 12
@@ -501,23 +502,23 @@ columns = 2
 
 [node name="BlueCard" parent="HUD/UI/GridContainer" unique_id=1705578490 instance=ExtResource("2_4d7sh")]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_x0ka3")
+theme_override_styles/panel = SubResource("StyleBoxFlat_d2bti")
 
 [node name="GreenCard" parent="HUD/UI/GridContainer" unique_id=1759957099 instance=ExtResource("2_4d7sh")]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_0h7mo")
+theme_override_styles/panel = SubResource("StyleBoxFlat_ta5nu")
 line_name = "Green"
 border_color = Color(0, 0.5176471, 0.23921569, 1)
 
 [node name="OrangeCard" parent="HUD/UI/GridContainer" unique_id=37719455 instance=ExtResource("2_4d7sh")]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_nr8wp")
+theme_override_styles/panel = SubResource("StyleBoxFlat_flf07")
 line_name = "Orange"
 border_color = Color(0.92941177, 0.54509807, 0, 1)
 
 [node name="RedCard" parent="HUD/UI/GridContainer" unique_id=823857636 instance=ExtResource("2_4d7sh")]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_d2bti")
+theme_override_styles/panel = SubResource("StyleBoxFlat_k73cj")
 line_name = "Red"
 border_color = Color(0.85490197, 0.16078432, 0.10980392, 1)
 
@@ -673,11 +674,26 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.8310547, -65.11871)
 [node name="DamageEmitter" parent="damage_emitters" unique_id=1755038919 node_paths=PackedStringArray("train") groups=["emitters"] instance=ExtResource("10_ir8iy")]
 train = NodePath("../../greenline")
 
+[node name="HitSound" type="AudioStreamPlayer2D" parent="damage_emitters/DamageEmitter" unique_id=1149547533]
+stream = ExtResource("13_0h7mo")
+
 [node name="DamageEmitter2" parent="damage_emitters" unique_id=835674219 node_paths=PackedStringArray("train") groups=["emitters"] instance=ExtResource("10_ir8iy")]
 train = NodePath("../../redline")
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="damage_emitters/DamageEmitter2" unique_id=640237606]
+stream = ExtResource("13_0h7mo")
+pitch_scale = 0.56
 
 [node name="DamageEmitter3" parent="damage_emitters" unique_id=968075034 node_paths=PackedStringArray("train") groups=["emitters"] instance=ExtResource("10_ir8iy")]
 train = NodePath("../../orangeline")
 
+[node name="HitSound" type="AudioStreamPlayer2D" parent="damage_emitters/DamageEmitter3" unique_id=1426412363]
+stream = ExtResource("13_0h7mo")
+pitch_scale = 1.4
+
 [node name="DamageEmitter4" parent="damage_emitters" unique_id=583009353 node_paths=PackedStringArray("train") groups=["emitters"] instance=ExtResource("10_ir8iy")]
 train = NodePath("../../blueline")
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="damage_emitters/DamageEmitter4" unique_id=1579794236]
+stream = ExtResource("13_0h7mo")
+pitch_scale = 2.14

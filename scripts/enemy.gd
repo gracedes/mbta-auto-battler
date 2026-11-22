@@ -26,7 +26,6 @@ func _connect_emitters() -> void:
 	print("listening: ", get_tree().get_nodes_in_group("emitters").size(), " trains")
 
 func _on_damage_dealt(damage):
-	print(self, " took ", damage, " hp: ", hp)
 	hp -= damage
 	if hp <= 0:
 		print("enemy defeated! resetting")
@@ -39,4 +38,4 @@ func _on_damage_dealt(damage):
 func apply_level(new_level: int) -> void:
 	level = new_level
 	hp = 50 + (10 + (level ** 0.75))
-	mi.scale = self.size * (size_scale_multiplier ** level)
+	#mi.scale = self.size * (size_scale_multiplier ** level)
