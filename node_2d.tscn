@@ -20,7 +20,6 @@
 [ext_resource type="Script" uid="uid://cp18o7ujl432" path="res://scripts/loading_screen.gd" id="15_d2bti"]
 [ext_resource type="AudioStream" uid="uid://cbo1ao4enwkua" path="res://assets/sounds/478197__jonnyruss01__click_1.wav" id="16_ta5nu"]
 
-<<<<<<< HEAD
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2bg7k"]
 bg_color = Color(0.7602972, 0.76029724, 0.76029706, 1)
 corner_radius_top_left = 100
@@ -65,8 +64,6 @@ corner_radius_top_right = 24
 corner_radius_bottom_right = 24
 corner_radius_bottom_left = 24
 
-=======
->>>>>>> ba96825 (the fire has a face now D:)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fs4d3"]
 bg_color = Color(0.8509804, 0.8509804, 0.8509804, 1)
 border_width_left = 12
