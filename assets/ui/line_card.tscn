@@ -4,12 +4,13 @@
 [ext_resource type="FontFile" uid="uid://b6jhkky7ko1p0" path="res://assets/ui/fonts/Inter-VariableFont_opsz,wght.ttf" id="1_v5iq4"]
 [ext_resource type="Texture2D" uid="uid://cel2i5g8egtte" path="res://assets/ui/imgs/LockIcon.png" id="3_kkln3"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4r7k6"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kkln3"]
 bg_color = Color(0.8509804, 0.8509804, 0.8509804, 1)
 border_width_left = 12
 border_width_top = 12
 border_width_right = 12
 border_width_bottom = 12
+border_color = Color(0.4, 0.4, 0.4, 1)
 corner_radius_top_left = 24
 corner_radius_top_right = 24
 corner_radius_bottom_right = 24
@@ -33,7 +34,7 @@ corner_radius_bottom_left = 8
 custom_minimum_size = Vector2(535, 172)
 offset_right = 40.0
 offset_bottom = 40.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_4r7k6")
+theme_override_styles/panel = SubResource("StyleBoxFlat_kkln3")
 script = ExtResource("1_c76qm")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=46199378]
@@ -51,15 +52,18 @@ layout_mode = 2
 
 [node name="LineNameLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=2138571204]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
 theme_override_colors/font_color = Color(0.06, 0.06, 0.06, 1)
 theme_override_fonts/font = ExtResource("1_v5iq4")
 theme_override_font_sizes/font_size = 36
+text = "???"
 
 [node name="DPSLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=757170209]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
@@ -71,6 +75,7 @@ theme_override_font_sizes/font_size = 36
 
 [node name="LevelLabel" type="Label" parent="MarginContainer/HBoxContainer" unique_id=1474061542]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
@@ -82,6 +87,7 @@ theme_override_font_sizes/font_size = 36
 
 [node name="XPBar" type="ProgressBar" parent="MarginContainer/HBoxContainer" unique_id=355472439]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(320, 29)
 layout_mode = 2
 size_flags_horizontal = 10
@@ -95,7 +101,6 @@ show_percentage = false
 
 [node name="LockIcon" type="TextureRect" parent="." unique_id=2134838498]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 size_flags_vertical = 0
 offset_transform_enabled = true
