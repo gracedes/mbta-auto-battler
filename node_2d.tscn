@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://4pqund3nukl7"]
 
-[ext_resource type="Script" uid="uid://bxoxkwab7raek" path="res://scripts/main.gd" id="1_wtcfe"]
+[ext_resource type="Script" uid="uid://dt3nc4our1mgp" path="res://scripts/main.gd" id="1_wtcfe"]
 [ext_resource type="PackedScene" uid="uid://cjlq260cxfpcf" path="res://assets/character/green/greenline.fbx" id="2_0hol4"]
+[ext_resource type="Script" uid="uid://c0sabsx3aj1ic" path="res://scripts/enemy.gd" id="2_4d7sh"]
 [ext_resource type="Texture2D" uid="uid://b5b175ditlmdj" path="res://assets/textures/febrianes86-fire-9534823.svg" id="2_hqns4"]
 [ext_resource type="PackedScene" uid="uid://dd1n2bcj21j5q" path="res://assets/world/rails.fbx" id="3_epypp"]
 [ext_resource type="Script" uid="uid://dtd6h1ynbhphw" path="res://scripts/train.gd" id="3_q6r6c"]
@@ -197,6 +198,7 @@ debug_color = Color(0.8377409, 0.8371174, 0.8315217, 0.41960785)
 
 [node name="Enemy" type="StaticBody3D" parent="." unique_id=1374640004]
 transform = Transform3D(6.81, 0, 0, 0, 6.81, 0, 0, 0, 6.81, 5.3601847, -19.652422, -67.69084)
+script = ExtResource("2_4d7sh")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Enemy" unique_id=1308014217]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7623446, 5.8153076, -0.9852171)
