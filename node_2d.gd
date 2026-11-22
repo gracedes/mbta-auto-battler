@@ -2,6 +2,8 @@
 extends Node2D
 
 signal nearby_lines_updated(active_lines: Array)
+signal xp_gained(route, xp)
+signal location_error(code: int)   # 1 = denied, 2 = unavailable, 3 = timeout
 
 const API_ROOT = "https://mbta.gracie.foo"
 var headers = []
@@ -23,16 +25,36 @@ var routes = {}
 var XP_GAIN = 25
 @export var visited = {}
 
-signal xp_gained(route, xp)
+# Web geolocation state. Callback objects must be kept as members,
+# or the browser stops calling them after they get garbage collected.
+var _geo = null
+var _pos_cb = null
+var _pos_err_cb = null
 
 func _ready():
 	create_routes_list()
+	_setup_geo()
 	await get_tree().create_timer(1.0).timeout
 	loc_ping()
 	await get_tree().create_timer(1.0).timeout
 	loc_ping()
 	await get_tree().create_timer(1.0).timeout
 	loc_ping()
+
+func _setup_geo() -> void:
+	"""Wires up the browser geolocation bridge. Requests NOTHING yet;
+	the first actual location fetch happens when loc_ping() is called."""
+	if OS.get_name() != "Web":
+		return
+	var navigator = JavaScriptBridge.get_interface("navigator")
+	if navigator == null or "geolocation" not in navigator:
+		push_error("no geolocation available (page must be served over HTTPS)")
+		return
+	_geo = navigator["geolocation"]
+	# Godot 4.4+:        JavaScriptBridge.create_callback(_on_position)
+	# Godot 4.3 and older: JavaScriptBridge.create_callback("_on_position", _on_position)
+	_pos_cb = JavaScriptBridge.create_callback(_on_position)
+	_pos_err_cb = JavaScriptBridge.create_callback(_on_position_error)
 
 func create_routes_list():
 	"""  creates a dict of stations which contains a list of routes it appears on """
@@ -63,15 +85,45 @@ func _populate_routes(_result, _response_code, _headers, body):
 	_start_next()
 
 func loc_ping():
-	var loc_temp = [-71.0625, 42.3563] 
-	# park street: -71.0625, 42.3563
-	# alewife: -71.141287, 42.39583
+	"""Requests the device's current position (web only), then queries
+	stops within MAX_RADIUS of it. In the editor, falls back to Park Street."""
+	if _geo != null:
+		# One-shot read: this is the only thing that touches geolocation.
+		# maximumAge: 10000 = up to 10s old cached fix is acceptable,
+		# which keeps the prompt from firing on every ping after the
+		# permission is already granted.
+		_geo.call("getCurrentPosition", _pos_cb, _pos_err_cb,
+			{"enableHighAccuracy": true, "timeout": 15000, "maximumAge": 10000})
+		return
+	# Editor / non-web fallback (editor has no navigator)
+	_query_nearby_stops([-71.0625, 42.3563])   # [lon, lat] : park street
+
+func _on_position(args: Array) -> void:
+	var coords = args[0]["coords"]
+	_query_nearby_stops([float(coords["longitude"]), float(coords["latitude"])])
+
+func _on_position_error(args: Array) -> void:
+	var err = args[0]
+	var code = int(err["code"])
+	match code:
+		1: push_error("location permission DENIED")
+		2: push_error("position unavailable")
+		3: push_error("location request timed out")
+		_: push_error("unknown location error: " + str(err))
+	location_error.emit(code)
+
+func _query_nearby_stops(loc: Array) -> void:
+	"""loc is [longitude, latitude]."""
 	var h := HTTPRequest.new()
 	h.timeout = 10.0
 	add_child(h)
 	h.request_completed.connect(_on_loc_request_completed.bind(h))
-	var err = h.request("%s/stops?filter[route]=%s&filter[longitude]=%s&filter[latitude]=%s&filter[radius]=%s" % [API_ROOT, ROUTES_STRING, loc_temp[0], loc_temp[1], MAX_RADIUS])
+	var err = h.request(
+		"%s/stops?filter%%5Broute%%5D=%s&filter%%5Blatitude%%5D=%s&filter%%5Blongitude%%5D=%s&filter%%5Bradius%%5D=%s"
+		% [API_ROOT, ROUTES_STRING, loc[1], loc[0], MAX_RADIUS]
+	)
 	if err != OK:
+		push_error("loc query failed: %s" % error_string(err))
 		h.queue_free()
 
 func _on_loc_request_completed(_result, _response_code, _headers, body, http_request):
@@ -89,7 +141,6 @@ func _on_loc_request_completed(_result, _response_code, _headers, body, http_req
 		print(name)
 		if not name in routes:
 			continue
-		
 		var xp
 		if name in visited:
 			xp = XP_GAIN
@@ -100,7 +151,7 @@ func _on_loc_request_completed(_result, _response_code, _headers, body, http_req
 		for route in routes[name]:
 			print(route + str(xp))
 			if not route in detected_lines:
-					detected_lines.append(route)
+				detected_lines.append(route)
 			# send signal to train to level up
 			xp_gained.emit(route, xp)
-  nearby_lines_updated.emit(detected_lines)
+		nearby_lines_updated.emit(detected_lines)
