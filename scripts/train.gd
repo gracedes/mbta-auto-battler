@@ -5,11 +5,18 @@ signal damage_enemy(damage)
 @export var line_name = ""     # "Green", "Red", "Orange", or "Blue"
 var location_manager: Node
 var anim_player: Node
-var anim_mapping = {
+const anim_mapping = {
 	"Green": "attack_green",
 	"Red": "attack_red",
 	"Orange": "attack_orange",
 	"Blue": "attack_blue"
+}
+
+const input_mapping = {
+	"Green": "green_line",
+	"Red": "red_line",
+	"Orange": "orange_line",
+	"Blue": "blue_line"
 }
 
 var attack_timer = 0.0
@@ -61,3 +68,17 @@ func calculate_vars() -> void:
 	level = (xp / 250) + 1
 	dps = 2.0 * (level ** (2.0 / 3.0))
 	rof = min(0.1 * (level / 5), ATTACK_TIMER_MAX - 0.2)
+
+func _input(_event):
+	debug_inputs()
+
+func debug_inputs():
+	if Input.is_action_pressed(input_mapping[line_name]):
+		if Input.is_action_just_pressed("add_xp"):
+			print("granting %s xp to %s" % [500, line_name])
+			xp += 500
+			calculate_vars()
+		elif Input.is_action_just_pressed("reset_debug"):
+			print("reset xp on %s" % [line_name])
+			xp = 0
+			calculate_vars()
