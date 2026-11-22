@@ -103,4 +103,4 @@ func _on_loc_request_completed(_result, _response_code, _headers, body, http_req
 					detected_lines.append(route)
 			# send signal to train to level up
 			xp_gained.emit(route, xp)
-  nearby_lines_updated.emit(detected_lines)
+		nearby_lines_updated.emit(detected_lines)
