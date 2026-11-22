@@ -15,6 +15,8 @@
 [ext_resource type="PackedScene" uid="uid://bosrbetdc2khk" path="res://assets/character/blue/blueline.fbx" id="8_4d7sh"]
 [ext_resource type="PackedScene" uid="uid://dkdfonhtr2ur0" path="res://assets/world/damage_emitter.tscn" id="10_ir8iy"]
 [ext_resource type="AudioStream" uid="uid://dttjdorvpftl6" path="res://assets/sounds/525105__jomse__plasticimpactb5.wav" id="13_0h7mo"]
+[ext_resource type="Script" uid="uid://cp18o7ujl432" path="res://scripts/loading_screen.gd" id="15_d2bti"]
+[ext_resource type="AudioStream" uid="uid://cbo1ao4enwkua" path="res://assets/sounds/478197__jonnyruss01__click_1.wav" id="16_ta5nu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ta5nu"]
 bg_color = Color(0.8509804, 0.8509804, 0.8509804, 1)
@@ -766,6 +768,7 @@ train = NodePath("../../greenline")
 
 [node name="HitSound" type="AudioStreamPlayer2D" parent="damage_emitters/DamageEmitter" unique_id=1149547533]
 stream = ExtResource("13_0h7mo")
+bus = &"Game"
 
 [node name="DamageEmitter2" parent="damage_emitters" unique_id=835674219 node_paths=PackedStringArray("train") groups=["emitters"] instance=ExtResource("10_ir8iy")]
 train = NodePath("../../redline")
@@ -773,6 +776,7 @@ train = NodePath("../../redline")
 [node name="HitSound" type="AudioStreamPlayer2D" parent="damage_emitters/DamageEmitter2" unique_id=640237606]
 stream = ExtResource("13_0h7mo")
 pitch_scale = 0.56
+bus = &"Game"
 
 [node name="DamageEmitter3" parent="damage_emitters" unique_id=968075034 node_paths=PackedStringArray("train") groups=["emitters"] instance=ExtResource("10_ir8iy")]
 train = NodePath("../../orangeline")
@@ -780,6 +784,7 @@ train = NodePath("../../orangeline")
 [node name="HitSound" type="AudioStreamPlayer2D" parent="damage_emitters/DamageEmitter3" unique_id=1426412363]
 stream = ExtResource("13_0h7mo")
 pitch_scale = 1.4
+bus = &"Game"
 
 [node name="DamageEmitter4" parent="damage_emitters" unique_id=583009353 node_paths=PackedStringArray("train") groups=["emitters"] instance=ExtResource("10_ir8iy")]
 train = NodePath("../../blueline")
@@ -787,3 +792,26 @@ train = NodePath("../../blueline")
 [node name="HitSound" type="AudioStreamPlayer2D" parent="damage_emitters/DamageEmitter4" unique_id=1579794236]
 stream = ExtResource("13_0h7mo")
 pitch_scale = 2.14
+bus = &"Game"
+
+[node name="LoadingScreen" type="CanvasLayer" parent="." unique_id=1474241353]
+layer = 100
+script = ExtResource("15_d2bti")
+
+[node name="Backdrop" type="ColorRect" parent="LoadingScreen" unique_id=1175648814]
+offset_right = 43.97
+offset_bottom = 42.115
+
+[node name="Status" type="Label" parent="LoadingScreen/Backdrop" unique_id=169263995]
+layout_mode = 0
+offset_left = 923.0
+offset_top = 516.0
+offset_right = 998.0
+offset_bottom = 539.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Loading..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TapSound" type="AudioStreamPlayer" parent="LoadingScreen" unique_id=1426332058]
+stream = ExtResource("16_ta5nu")
