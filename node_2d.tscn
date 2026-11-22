@@ -5,13 +5,14 @@
 [ext_resource type="PackedScene" uid="uid://b13j32stagft" path="res://assets/ui/line_card.tscn" id="2_4d7sh"]
 [ext_resource type="Texture2D" uid="uid://b5b175ditlmdj" path="res://assets/textures/febrianes86-fire-9534823.svg" id="2_hqns4"]
 [ext_resource type="PackedScene" uid="uid://dd1n2bcj21j5q" path="res://assets/world/rails.fbx" id="3_epypp"]
+[ext_resource type="Script" uid="uid://c0sabsx3aj1ic" path="res://scripts/enemy.gd" id="3_hqns4"]
 [ext_resource type="Script" uid="uid://dtd6h1ynbhphw" path="res://scripts/train.gd" id="3_q6r6c"]
 [ext_resource type="PackedScene" uid="uid://gpp4wab8lcqs" path="res://assets/character/red/redline.fbx" id="5_q6r6c"]
 [ext_resource type="PackedScene" uid="uid://bdru7kinus1lt" path="res://assets/character/orange/orangeline.fbx" id="7_rj586"]
 [ext_resource type="PackedScene" uid="uid://bosrbetdc2khk" path="res://assets/character/blue/blueline.fbx" id="8_4d7sh"]
 [ext_resource type="PackedScene" uid="uid://dkdfonhtr2ur0" path="res://assets/world/damage_emitter.tscn" id="10_ir8iy"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ir8iy"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x0ka3"]
 bg_color = Color(0.8509804, 0.8509804, 0.8509804, 1)
 border_width_left = 12
 border_width_top = 12
@@ -23,7 +24,7 @@ corner_radius_top_right = 24
 corner_radius_bottom_right = 24
 corner_radius_bottom_left = 24
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hqns4"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0h7mo"]
 bg_color = Color(0.8509804, 0.8509804, 0.8509804, 1)
 border_width_left = 12
 border_width_top = 12
@@ -35,7 +36,7 @@ corner_radius_top_right = 24
 corner_radius_bottom_right = 24
 corner_radius_bottom_left = 24
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x0ka3"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nr8wp"]
 bg_color = Color(0.8509804, 0.8509804, 0.8509804, 1)
 border_width_left = 12
 border_width_top = 12
@@ -47,7 +48,7 @@ corner_radius_top_right = 24
 corner_radius_bottom_right = 24
 corner_radius_bottom_left = 24
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0h7mo"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d2bti"]
 bg_color = Color(0.8509804, 0.8509804, 0.8509804, 1)
 border_width_left = 12
 border_width_top = 12
@@ -492,23 +493,23 @@ columns = 2
 
 [node name="BlueCard" parent="HUD/UI/GridContainer" unique_id=1705578490 instance=ExtResource("2_4d7sh")]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ir8iy")
+theme_override_styles/panel = SubResource("StyleBoxFlat_x0ka3")
 
 [node name="GreenCard" parent="HUD/UI/GridContainer" unique_id=1759957099 instance=ExtResource("2_4d7sh")]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_hqns4")
+theme_override_styles/panel = SubResource("StyleBoxFlat_0h7mo")
 line_name = "Green"
 border_color = Color(0, 0.5176471, 0.23921569, 1)
 
 [node name="OrangeCard" parent="HUD/UI/GridContainer" unique_id=37719455 instance=ExtResource("2_4d7sh")]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_x0ka3")
+theme_override_styles/panel = SubResource("StyleBoxFlat_nr8wp")
 line_name = "Orange"
 border_color = Color(0.92941177, 0.54509807, 0, 1)
 
 [node name="RedCard" parent="HUD/UI/GridContainer" unique_id=823857636 instance=ExtResource("2_4d7sh")]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_0h7mo")
+theme_override_styles/panel = SubResource("StyleBoxFlat_d2bti")
 line_name = "Red"
 border_color = Color(0.85490197, 0.16078432, 0.10980392, 1)
 
@@ -563,7 +564,8 @@ shape = SubResource("WorldBoundaryShape3D_2bg7k")
 debug_color = Color(0.8377409, 0.8371174, 0.8315217, 0.41960785)
 
 [node name="Enemy" type="StaticBody3D" parent="." unique_id=1374640004]
-transform = Transform3D(6.81, 0, 0, 0, 6.81, 0, 0, 0, 6.81, 5.3601847, -19.652422, -67.69084)
+transform = Transform3D(6.81, 0, 0, 0, 6.81, 0, 0, 0, 6.81, 5.3601847, -19.652422, -71.80223)
+script = ExtResource("3_hqns4")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Enemy" unique_id=1308014217]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7623446, 5.8153076, -0.9852171)
@@ -632,14 +634,14 @@ libraries/ = SubResource("AnimationLibrary_d2bti")
 [node name="damage_emitters" type="Node3D" parent="." unique_id=1995572600]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.8310547, -65.11871)
 
-[node name="DamageEmitter" parent="damage_emitters" unique_id=1755038919 node_paths=PackedStringArray("train") instance=ExtResource("10_ir8iy")]
+[node name="DamageEmitter" parent="damage_emitters" unique_id=1755038919 node_paths=PackedStringArray("train") groups=["emitters"] instance=ExtResource("10_ir8iy")]
 train = NodePath("../../greenline")
 
-[node name="DamageEmitter2" parent="damage_emitters" unique_id=835674219 node_paths=PackedStringArray("train") instance=ExtResource("10_ir8iy")]
+[node name="DamageEmitter2" parent="damage_emitters" unique_id=835674219 node_paths=PackedStringArray("train") groups=["emitters"] instance=ExtResource("10_ir8iy")]
 train = NodePath("../../redline")
 
-[node name="DamageEmitter3" parent="damage_emitters" unique_id=968075034 node_paths=PackedStringArray("train") instance=ExtResource("10_ir8iy")]
+[node name="DamageEmitter3" parent="damage_emitters" unique_id=968075034 node_paths=PackedStringArray("train") groups=["emitters"] instance=ExtResource("10_ir8iy")]
 train = NodePath("../../orangeline")
 
-[node name="DamageEmitter4" parent="damage_emitters" unique_id=583009353 node_paths=PackedStringArray("train") instance=ExtResource("10_ir8iy")]
+[node name="DamageEmitter4" parent="damage_emitters" unique_id=583009353 node_paths=PackedStringArray("train") groups=["emitters"] instance=ExtResource("10_ir8iy")]
 train = NodePath("../../blueline")

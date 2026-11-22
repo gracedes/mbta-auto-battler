@@ -1,5 +1,7 @@
 extends Node3D
 
+signal send_damage(damage)
+
 const DamageNumber := preload("res://scripts/damage_number.gd")
 @export var train: Node
 
@@ -18,6 +20,7 @@ func _on_damage_dealt(damage):
 
 # Called by the animation's Call Method track at the impact frame.
 func on_anim_hit() -> void:
+	send_damage.emit(last_damage)
 	spawn_damage(last_damage)
 
 func spawn_damage(amount: float) -> void:
