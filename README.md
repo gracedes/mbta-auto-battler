@@ -20,6 +20,7 @@ All assets, including our beautiful 3D modeled trains, were made by hand by Nat.
 - Godot
 - Blender
 - MBTA API
+- Figma
 - Cloudflare Tunnel
 - Node.js
 #### Sound Credits
