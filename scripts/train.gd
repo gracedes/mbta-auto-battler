@@ -44,11 +44,11 @@ func _process(delta: float) -> void:
 		attack_timer += delta
 	else:
 		if visible:
+			damage_enemy.emit(dps * attack_timer)
 			if line_name in anim_mapping:
 				if ATTACK_TIMER_MAX - rof < 3.33:
 					anim_player.speed_scale = 3.33 / (ATTACK_TIMER_MAX - rof)
 				anim_player.play(anim_mapping[line_name], )
-			damage_enemy.emit(dps * attack_timer)
 		attack_timer = 0.0
 
 func _on_xp_gain(route, xp_increase) -> void:
