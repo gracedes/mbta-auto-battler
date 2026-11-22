@@ -9,6 +9,8 @@ signal station_visited(station_name: String, is_new: bool)
 const API_ROOT = "https://mbta.gracie.foo"
 var headers = []
 
+const SAVE_PATH := "user://save.json"
+
 const MAX_RADIUS = 0.002    # 0.01 = 0.5 miles
 const ROUTES = ["Green", "Red", "Orange", "Blue"]
 const ROUTE_FILTERS = {
@@ -54,6 +56,7 @@ var _pos_err_cb = null
 
 func _ready():
 	create_routes_list()
+	_load_save()
 	_setup_geo()
 
 func _process(delta: float) -> void:
@@ -147,7 +150,8 @@ func _on_loc_request_completed(_result, _response_code, _headers, body, http_req
 	var now = Time.get_unix_time_from_system()
 	
 	for station in json["data"]:
-		name = station["attributes"]["name"]
+		@warning_ignore("shadowed_variable_base_class") 
+		var name = station["attributes"]["name"]
 		if not name in routes:
 			continue
 		var is_new := false
@@ -170,6 +174,63 @@ func _on_loc_request_completed(_result, _response_code, _headers, body, http_req
 				unlocked_trains[route] = 1
 				nearby_lines_updated.emit(unlocked_trains.keys())
 			xp_gained.emit(route, xp)
+	save.call_deferred()
+
+func save() -> void:
+	print("saving...")
+	var data := {
+		"version": 1,
+		"visited": visited,
+		"unlocked_trains": unlocked_trains,
+		"enemy_level": 0,
+		"train_xp": {},
+	}
+	var enemy = $Enemy
+	if enemy:
+		data["enemy_level"] = enemy.level
+	for train in get_tree().get_nodes_in_group(&"trains"):
+		data["train_xp"][train.line_name] = train.xp
+
+	var f := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
+	if f == null:
+		push_error("save: could not open ", SAVE_PATH)
+		return
+	f.store_string(JSON.stringify(data))
+	print("save complete!")
+
+func _load_save() -> void:
+	var f := FileAccess.open(SAVE_PATH, FileAccess.READ)
+	if f == null:
+		return
+	var parsed = JSON.parse_string(f.get_as_text())
+	if not (parsed is Dictionary):
+		push_warning("save: unreadable or wrong type, ignoring")
+		return
+
+	var v = parsed.get("visited")
+	if v is Dictionary:
+		visited = v
+
+	var u = parsed.get("unlocked_trains")
+	if u is Dictionary:
+		unlocked_trains = u
+		nearby_lines_updated.emit(unlocked_trains.keys())
+
+	var enemy = $Enemy
+	if enemy and parsed.has("enemy_level"):
+		enemy.apply_level(int(parsed["enemy_level"]))
+
+	var tx = parsed.get("train_xp")
+	if tx is Dictionary:
+		for train in get_tree().get_nodes_in_group(&"trains"):
+			var xp = tx.get(train.line_name)
+			if xp != null:
+				train.xp = int(xp)
+				train.calculate_vars()
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		save()
 
 func _input(_event):
 	debug_inputs()
@@ -202,3 +263,6 @@ func debug_inputs():
 			print("resetting debug options")
 			station_cooldown = true
 			location_index = 0
+		elif Input.is_action_just_pressed("delete_save"):
+			print("deleting save :(")
+			DirAccess.remove_absolute(SAVE_PATH)
