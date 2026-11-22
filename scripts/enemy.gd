@@ -1,5 +1,6 @@
 extends StaticBody3D
 
+@warning_ignore("unused_signal")
 signal hp_changed(current_hp: float, max_hp: float, level: int)
 
 @export var level: int = 1
