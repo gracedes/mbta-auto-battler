@@ -189,10 +189,9 @@ transform = Transform3D(-1, 0, -3.166382e-06, 0, 1, 0, 1.509958e-07, 0, -20.97, 
 [node name="rails4" parent="." unique_id=481925957 instance=ExtResource("3_epypp")]
 transform = Transform3D(-1, 0, -3.166382e-06, 0, 1, 0, 1.509958e-07, 0, -20.97, 10.66259, 1.9981437, -4.781929)
 
-[node name="greenline" parent="." unique_id=1956945032 node_paths=PackedStringArray("location_manager") instance=ExtResource("2_0hol4")]
+[node name="greenline" parent="." unique_id=1956945032 instance=ExtResource("2_0hol4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.998, -24.555)
 script = ExtResource("3_q6r6c")
-location_manager = NodePath("..")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="greenline" unique_id=437037788]
 libraries/ = SubResource("AnimationLibrary_q6r6c")
