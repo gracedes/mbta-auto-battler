@@ -194,6 +194,20 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 0, 0.33684856), Vector3(0, 0, -0.27925268), Vector3(0, 0, 0.20943952), Vector3(0, 0, -0.13962634), Vector3(0, 0, 0.05235988), Vector3(0, 0, -0.017453292), Vector3(0, 0, 0)]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../damage_emitters/DamageEmitter")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.09),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"on_anim_hit"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_k73cj"]
 _data = {
@@ -616,7 +630,7 @@ line_name = "Blue"
 libraries/ = SubResource("AnimationLibrary_d2bti")
 
 [node name="damage_emitters" type="Node3D" parent="." unique_id=1995572600]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -65.11871)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.8310547, -65.11871)
 
 [node name="DamageEmitter" parent="damage_emitters" unique_id=1755038919 node_paths=PackedStringArray("train") instance=ExtResource("10_ir8iy")]
 train = NodePath("../../greenline")

@@ -6,7 +6,7 @@ signal damage_enemy(damage)
 var location_manager: Node
 var anim_player: Node
 var anim_mapping = {
-	"Green": "attack",
+	"Green": "attack_green",
 	"Red": "attack_red",
 	"Orange": "attack_orange",
 	"Blue": "attack_blue"
