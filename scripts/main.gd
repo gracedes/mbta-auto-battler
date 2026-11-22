@@ -157,7 +157,6 @@ func _on_loc_request_completed(_result, _response_code, _headers, body, http_req
 	if json == null:
 		return
 	
-	var detected_lines: Array = []
 	var xp = 0
 	var now = Time.get_unix_time_from_system()
 	
@@ -178,10 +177,10 @@ func _on_loc_request_completed(_result, _response_code, _headers, body, http_req
 
 		for route in routes[name]:
 			print(route + " +" + str(xp))
-			if not route in detected_lines:
-				detected_lines.append(route)
+			if route not in unlocked_trains:
+				unlocked_trains[route] = 1
+				nearby_lines_updated.emit(unlocked_trains.keys())
 			xp_gained.emit(route, xp)
-		nearby_lines_updated.emit(detected_lines)
 
 func _input(_event):
 	debug_inputs()
