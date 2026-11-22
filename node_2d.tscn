@@ -103,10 +103,9 @@ use_threads = true
 transform = Transform3D(0.7716232, 0.159262, -0.61581916, 0, 0.9681475, 0.2503805, 0.6360799, -0.1931994, 0.7470451, -20.619001, 14.169964, -3.7985945)
 fov = 77.71061
 
-[node name="greenline" parent="." unique_id=1956945032 node_paths=PackedStringArray("location_manager") instance=ExtResource("2_0hol4")]
+[node name="greenline" parent="." unique_id=1956945032 instance=ExtResource("2_0hol4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.998, -24.555)
 script = ExtResource("3_q6r6c")
-location_manager = NodePath("..")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="greenline" unique_id=437037788]
 libraries/ = SubResource("AnimationLibrary_q6r6c")

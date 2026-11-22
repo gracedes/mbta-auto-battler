@@ -21,6 +21,8 @@ var routes = {}
 var XP_GAIN = 25
 @export var visited = {}
 
+signal xp_gained(route, xp)
+
 func _ready():
 	create_routes_list()
 	await get_tree().create_timer(1.0).timeout
@@ -59,7 +61,7 @@ func _populate_routes(_result, _response_code, _headers, body):
 	_start_next()
 
 func loc_ping():
-	var loc_temp = [-71.141287, 42.39583]
+	var loc_temp = [-71.11025, 42.328316] # formatted long then lat
 	var h := HTTPRequest.new()
 	h.timeout = 10.0
 	add_child(h)
@@ -86,8 +88,9 @@ func _on_loc_request_completed(_result, _response_code, _headers, body, http_req
 			xp = XP_GAIN
 		else:
 			visited[name] = 1
-			xp = 10 * XP_GAIN
+			xp = 4 * XP_GAIN
 		print(visited)
 		for route in routes[name]:
 			print(route + str(xp))
 			# send signal to train to level up
+			xp_gained.emit(route, xp)
