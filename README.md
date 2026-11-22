@@ -18,6 +18,7 @@ For our project wanted to make a game that would inspire players to stray away f
 All assets, including our beautiful 3D modeled trains, were made by hand by Nat.
 ### Tools Used
 - Godot
+- Blender
 - MBTA API
 - Cloudflare Tunnel
 - Node.js
