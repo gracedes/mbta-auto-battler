@@ -45,6 +45,7 @@ var ping_timer := PING_INTERVAL
 
 var XP_GAIN = 25
 @export var visited = {}
+@export var unlocked_trains = {}
 
 # Web geolocation state. Callback objects must be kept as members,
 # or the browser stops calling them after they get garbage collected.
@@ -167,15 +168,16 @@ func _on_loc_request_completed(_result, _response_code, _headers, body, http_req
 		if not name in visited:
 			visited[name] = now          # first sighting: grant the bonus, start the hour
 			xp = 4 * XP_GAIN
+			print(name)
 		elif station_cooldown and now - visited[name] < VISIT_COOLDOWN:
 			continue                     # still within the hour: nothing this ping
 		else:
 			visited[name] = now          # hour elapsed: grant normal XP, restart the hour
 			xp = XP_GAIN
+			print(name)
 
-		print(visited)
 		for route in routes[name]:
-			print(route + str(xp))
+			print(route + " +" + str(xp))
 			if not route in detected_lines:
 				detected_lines.append(route)
 			xp_gained.emit(route, xp)
@@ -204,11 +206,11 @@ func debug_inputs():
 			else:
 				print("station cooldown toggled on")
 				station_cooldown = true
-		elif Input.is_action_just_pressed("reset_debug"):
-			print("resetting debug options")
-			station_cooldown = true
-			location_index = 0
 		elif Input.is_action_just_pressed("reset_all"):
 			print("restarting scene")
 			await get_tree().process_frame
 			get_tree().reload_current_scene()
+		elif Input.is_action_just_pressed("reset_debug"):
+			print("resetting debug options")
+			station_cooldown = true
+			location_index = 0
