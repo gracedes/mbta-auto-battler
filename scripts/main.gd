@@ -150,9 +150,11 @@ func _on_loc_request_completed(_result, _response_code, _headers, body, http_req
 		name = station["attributes"]["name"]
 		if not name in routes:
 			continue
+		var is_new := false
 		if not name in visited:
 			visited[name] = now
 			xp = 4 * XP_GAIN
+			is_new = true
 			print(name)
 		elif station_cooldown and now - visited[name] < VISIT_COOLDOWN:
 			continue
@@ -160,6 +162,7 @@ func _on_loc_request_completed(_result, _response_code, _headers, body, http_req
 			visited[name] = now
 			xp = XP_GAIN
 			print(name)
+		station_visited.emit(name, is_new)
 
 		for route in routes[name]:
 			print(route + " +" + str(xp))

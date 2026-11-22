@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://dd1n2bcj21j5q" path="res://assets/world/rails.fbx" id="3_epypp"]
 [ext_resource type="Script" uid="uid://c0sabsx3aj1ic" path="res://scripts/enemy.gd" id="3_hqns4"]
 [ext_resource type="Script" uid="uid://dtd6h1ynbhphw" path="res://scripts/train.gd" id="3_q6r6c"]
-[ext_resource type="PackedScene" uid="uid://bsw71d3g5pbes" path="res://assets/ui/notif_card.tscn" id="4_0h7mo"]
 [ext_resource type="PackedScene" uid="uid://gpp4wab8lcqs" path="res://assets/character/red/redline.fbx" id="5_q6r6c"]
 [ext_resource type="PackedScene" uid="uid://bdru7kinus1lt" path="res://assets/character/orange/orangeline.fbx" id="7_rj586"]
 [ext_resource type="PackedScene" uid="uid://bosrbetdc2khk" path="res://assets/character/blue/blueline.fbx" id="8_4d7sh"]
@@ -541,12 +540,22 @@ grow_vertical = 0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_4r7k6")
 
-[node name="NotifCard" parent="HUD/UI/StationNotifBox" unique_id=263950290 instance=ExtResource("4_0h7mo")]
-layout_mode = 0
-offset_left = 38.0
-offset_top = 280.0
-offset_right = 573.0
-offset_bottom = 452.0
+[node name="MarginContainer" type="MarginContainer" parent="HUD/UI/StationNotifBox" unique_id=1715443195]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="NotifStack" type="VBoxContainer" parent="HUD/UI/StationNotifBox/MarginContainer" unique_id=1907452121]
+layout_mode = 2
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1322596672]
 transform = Transform3D(0.39236966, -0.39119896, 0.83247185, 0, 0.90505, 0.42530522, -0.9198076, -0.16687685, 0.35511416, 118.51138, 71.25314, 6.9839134)
