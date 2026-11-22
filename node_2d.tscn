@@ -383,7 +383,7 @@ line_name = "Green"
 
 [node name="AnimationPlayer" parent="greenline" unique_id=1179685689 instance=ExtResource("6_4d7sh")]
 
-[node name="redline" parent="." unique_id=82451194 instance=ExtResource("5_q6r6c")]
+[node name="redline" parent="." unique_id=82451194 groups=["trains"] instance=ExtResource("5_q6r6c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.589, 1.998, -24.555)
 script = ExtResource("3_q6r6c")
 line_name = "Red"
@@ -392,7 +392,7 @@ line_name = "Red"
 root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_hqns4")
 
-[node name="orangeline" parent="." unique_id=1932407106 instance=ExtResource("7_rj586")]
+[node name="orangeline" parent="." unique_id=1932407106 groups=["trains"] instance=ExtResource("7_rj586")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.663, 1.935, -26.837805)
 script = ExtResource("3_q6r6c")
 line_name = "Orange"
@@ -400,7 +400,7 @@ line_name = "Orange"
 [node name="AnimationPlayer" type="AnimationPlayer" parent="orangeline" unique_id=561931983]
 libraries/ = SubResource("AnimationLibrary_0h7mo")
 
-[node name="blueline" parent="." unique_id=917154609 instance=ExtResource("8_4d7sh")]
+[node name="blueline" parent="." unique_id=917154609 groups=["trains"] instance=ExtResource("8_4d7sh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.683, 1.935, -26.989553)
 script = ExtResource("3_q6r6c")
 line_name = "Blue"
