@@ -1,4 +1,5 @@
-# Project Name
+# Next Stop: Fire!
+### An MBTA inspired auto-battler
 By Nat Hem and Grace Desrochers
 ## Goal
 For our project wanted to make a game that would inspire players to stray away from their daily commute and explore the parts of the T they may have never seen before! To do this, we came up with an auto-battler idle game where the player has to go to MBTA stations in real life in order to level up their party of trains in order to fight the T's greatest enemy: unexpected fires.
