@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dkdfonhtr2ur0"]
+
+[ext_resource type="Script" uid="uid://wpllo4l11hpd" path="res://scripts/damage_emitter.gd" id="1_qef7o"]
+
+[node name="DamageEmitter" type="Node3D" unique_id=1755038919]
+script = ExtResource("1_qef7o")
