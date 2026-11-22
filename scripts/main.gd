@@ -24,6 +24,9 @@ var pending_routes = ROUTES.duplicate()
 var current_route = ""
 var routes = {}
 
+const PING_INTERVAL := 15.0
+var ping_timer := PING_INTERVAL
+
 var XP_GAIN = 25
 @export var visited = {}
 
@@ -36,12 +39,13 @@ var _pos_err_cb = null
 func _ready():
 	create_routes_list()
 	_setup_geo()
-	await get_tree().create_timer(1.0).timeout
-	loc_ping()
-	await get_tree().create_timer(1.0).timeout
-	loc_ping()
-	await get_tree().create_timer(1.0).timeout
-	loc_ping()
+
+func _process(delta: float) -> void:
+	ping_timer += delta
+	if ping_timer >= PING_INTERVAL:
+		ping_timer = 0.0
+		print("pinging location")
+		loc_ping()
 
 func _setup_geo() -> void:
 	"""Wires up the browser geolocation bridge. Requests NOTHING yet;
