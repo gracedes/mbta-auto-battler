@@ -32,6 +32,7 @@ func _process(delta: float) -> void:
 	if attack_timer < ATTACK_TIMER_MAX - rof:
 		attack_timer += delta
 	else:
+		# attack
 		attack_timer = 0.0
 
 func _on_xp_gain(route, xp_increase) -> void:

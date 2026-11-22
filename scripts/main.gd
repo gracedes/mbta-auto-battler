@@ -18,6 +18,8 @@ const ROUTE_FILTERS = {
 }
 const ROUTES_STRING = "Green-B,Green-C,Green-D,Green-E,Red,Orange,Blue"
 
+const VISIT_COOLDOWN := 60.0 * 60.0   # one hour
+
 var pending_routes = ROUTES.duplicate()
 var current_route = ""
 var routes = {}
@@ -135,23 +137,27 @@ func _on_loc_request_completed(_result, _response_code, _headers, body, http_req
 		return
 	
 	var detected_lines: Array = []
+	var xp = 0
+	var now = Time.get_unix_time_from_system()
 	
 	for station in json["data"]:
 		name = station["attributes"]["name"]
-		print(name)
 		if not name in routes:
 			continue
-		var xp
-		if name in visited:
-			xp = XP_GAIN
-		else:
-			visited[name] = 1
+
+		if not name in visited:
+			visited[name] = now          # first sighting: grant the bonus, start the hour
 			xp = 4 * XP_GAIN
+		elif now - visited[name] < VISIT_COOLDOWN:
+			continue                     # still within the hour: nothing this ping
+		else:
+			visited[name] = now          # hour elapsed: grant normal XP, restart the hour
+			xp = XP_GAIN
+
 		print(visited)
 		for route in routes[name]:
 			print(route + str(xp))
 			if not route in detected_lines:
 				detected_lines.append(route)
-			# send signal to train to level up
 			xp_gained.emit(route, xp)
 		nearby_lines_updated.emit(detected_lines)
