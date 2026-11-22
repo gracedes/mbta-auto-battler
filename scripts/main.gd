@@ -48,8 +48,6 @@ var XP_GAIN = 25
 @export var visited = {}
 @export var unlocked_trains = {}
 
-# Web geolocation state. Callback objects must be kept as members,
-# or the browser stops calling them after they get garbage collected.
 var _geo = null
 var _pos_cb = null
 var _pos_err_cb = null
@@ -66,8 +64,6 @@ func _process(delta: float) -> void:
 		loc_ping()
 
 func _setup_geo() -> void:
-	"""Wires up the browser geolocation bridge. Requests NOTHING yet;
-	the first actual location fetch happens when loc_ping() is called."""
 	if OS.get_name() != "Web":
 		return
 	var navigator = JavaScriptBridge.get_interface("navigator")
@@ -75,13 +71,10 @@ func _setup_geo() -> void:
 		push_error("no geolocation available (page must be served over HTTPS)")
 		return
 	_geo = navigator["geolocation"]
-	# Godot 4.4+:        JavaScriptBridge.create_callback(_on_position)
-	# Godot 4.3 and older: JavaScriptBridge.create_callback("_on_position", _on_position)
 	_pos_cb = JavaScriptBridge.create_callback(_on_position)
 	_pos_err_cb = JavaScriptBridge.create_callback(_on_position_error)
 
 func create_routes_list():
-	"""  creates a dict of stations which contains a list of routes it appears on """
 	$HTTPRequest.request_completed.connect(_populate_routes)
 	_start_next()
 
@@ -109,17 +102,10 @@ func _populate_routes(_result, _response_code, _headers, body):
 	_start_next()
 
 func loc_ping():
-	"""Requests the device's current position (web only), then queries
-	stops within MAX_RADIUS of it. In the editor, falls back to Park Street."""
 	if _geo != null:
-		# One-shot read: this is the only thing that touches geolocation.
-		# maximumAge: 10000 = up to 10s old cached fix is acceptable,
-		# which keeps the prompt from firing on every ping after the
-		# permission is already granted.
 		_geo.call("getCurrentPosition", _pos_cb, _pos_err_cb,
 			{"enableHighAccuracy": true, "timeout": 15000, "maximumAge": 10000})
 		return
-	# Editor / non-web fallback (editor has no navigator)
 	_query_nearby_stops(TEST_LOCATIONS[location_index % len(TEST_LOCATIONS)])
 
 func _on_position(args: Array) -> void:
@@ -137,7 +123,6 @@ func _on_position_error(args: Array) -> void:
 	location_error.emit(code)
 
 func _query_nearby_stops(loc: Array) -> void:
-	"""loc is [longitude, latitude]."""
 	var h := HTTPRequest.new()
 	h.timeout = 10.0
 	add_child(h)
@@ -166,13 +151,13 @@ func _on_loc_request_completed(_result, _response_code, _headers, body, http_req
 		if not name in routes:
 			continue
 		if not name in visited:
-			visited[name] = now          # first sighting: grant the bonus, start the hour
+			visited[name] = now
 			xp = 4 * XP_GAIN
 			print(name)
 		elif station_cooldown and now - visited[name] < VISIT_COOLDOWN:
-			continue                     # still within the hour: nothing this ping
+			continue
 		else:
-			visited[name] = now          # hour elapsed: grant normal XP, restart the hour
+			visited[name] = now
 			xp = XP_GAIN
 			print(name)
 

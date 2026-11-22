@@ -6,21 +6,22 @@ extends CanvasLayer
 	"Orange": $UI/GridContainer/OrangeCard,
 	"Red": $UI/GridContainer/RedCard,
 }
-@onready var notif_card = $UI/StationNotifBox
+@onready var notif_card = $UI/StationNotifBox/NotifCard
+
 
 var train_nodes := {}
 
 func _ready() -> void:
+	var main := get_tree().current_scene
+	main.nearby_lines_updated.connect(_on_nearby_lines_updated)
+	main.xp_gained.connect(_on_xp_gained)
+
 	await get_tree().process_frame
 	for train in get_tree().get_nodes_in_group("trains"):
 		if train.line_name in line_cards:
 			train_nodes[train.line_name] = train
 
-	var main := get_parent()
-	if main.has_signal("nearby_lines_updated"):
-		main.nearby_lines_updated.connect(_on_nearby_lines_updated)
-	if main.has_signal("station_visited"):
-		main.station_visited.connect(_on_station_visited)
+
 
 func _process(_delta: float) -> void:
 	for route in train_nodes:
@@ -40,5 +41,12 @@ func _on_nearby_lines_updated(active_lines: Array) -> void:
 		if route in line_cards:
 			line_cards[route].unlock()
 			
-func _on_station_visited(station_name: String, is_new: bool) -> void:
-	notif_card.show_notification(station_name, is_new )
+func _on_xp_gained(route: String, xp: int) -> void:
+	if route in line_cards:
+		line_cards[route].unlock()
+
+	var main := get_tree().current_scene
+	if not main.visited.is_empty():
+		var latest_station: String = main.visited.keys().back()
+		var is_new: bool = (xp == 4 * main.XP_GAIN)
+		notif_card.show_notification(latest_station, is_new)

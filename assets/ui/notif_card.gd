@@ -1,27 +1,25 @@
-extends PanelContainer
+extends Control
 
-@onready var status_label: Label = $%StationNotifLabel
-@onready var name_label: Label = $%StationNameLabel
+@onready var status_label: Label = find_child("StationNotifLabel", true, false)
+@onready var name_label: Label = find_child("StationNameLabel", true, false)
 
-var active_tween: Tween
+var display_timer: float = 0.0
 
 func _ready() -> void:
+	visible = false
 	modulate.a = 0.0
-	hide()
-	
+
+func _process(delta: float) -> void:
+	if display_timer > 0.0:
+		display_timer -= delta
+		if display_timer <= 0.0:
+			visible = false
+			modulate.a = 0.0
+
 func show_notification(station_name: String, is_new: bool) -> void:
-	if is_new:
-		status_label.text = "New Station Unlocked!"
-	else:
-		status_label.text = "Visited Station:"
+	status_label.text = "New Station Unlocked!" if is_new else "Visited Station:"
 	name_label.text = station_name
-	
-	if active_tween and active_tween.is_valid():
-		active_tween.kill()
-	
-	show()
-	active_tween = create_tween()
-	active_tween.tween_property(self, "modulate:a", 1.0, 0.25)
-	active_tween.tween_interval(3.5)
-	active_tween.tween_property(self, "modulate:a", 0.0, 0.4)
-	active_tween.tween_callback(hide)
+
+	visible = true
+	modulate.a = 1.0
+	display_timer = 3.5
